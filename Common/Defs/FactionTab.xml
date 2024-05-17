@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+    <MainButtonDef>
+        <defName>WOD_FactionStatus</defName>
+        <label>Faction Drug Status</label>
+        <description>Open Drug Status.</description>
+        <workerClass>WarOnDrug.MainButton_Toggle</workerClass>
+        <order>79</order>
+            <minimized>True</minimized>
+        <iconPath>Pill</iconPath>
+        <defaultHotKey></defaultHotKey>
+      </MainButtonDef>
+</Defs>

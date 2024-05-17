@@ -1,0 +1,18 @@
+﻿/*
+
+namespace WarOnDrug
+{
+    public class WODSepcialVTEContract: VanillaTradingExpanded.Contract
+    {
+        WODSepcialVTEContract():base()
+        {
+            
+        }
+
+        public new float ContractFulfilmentChance() //Would not be fulfilled by random event.
+        {
+            return 0;
+        }
+    }
+}
+*/

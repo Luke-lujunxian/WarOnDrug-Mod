@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/StorytellerDef[@Name="BaseStoryteller"]/comps</xpath>
+        <value>
+            <li Class="StorytellerCompProperties_FactionInteraction">
+                <incident>CaravanArrivalDrugCollector</incident>
+                <minDaysPassed>30</minDaysPassed>
+                <baseIncidentsPerYear>4</baseIncidentsPerYear>
+                <minSpacingDays>15</minSpacingDays>
+                <minWealth>20000</minWealth>
+                <allowedTargetTags>
+                  <li>Map_PlayerHome</li>
+                </allowedTargetTags>
+              </li>
+        </value>
+    </Operation>
+</Patch>

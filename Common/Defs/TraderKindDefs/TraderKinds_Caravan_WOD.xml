@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <TraderKindDef>
+    <defName>WOD_Caravan_DrugCollector</defName>
+    <label>Bulk Drug middle man</label>
+    <requestable>False</requestable>
+    <commonality>4</commonality>
+    <!--4 times a year?-->
+    <hideThingsNotWillingToTrade>True</hideThingsNotWillingToTrade>
+    <stockGenerators>
+      <!-- Buying -->
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Silver</thingDef>
+        <countRange>750~1200</countRange>
+      </li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>Drugs</tag></li>
+    </stockGenerators>
+  </TraderKindDef>
+</Defs>
