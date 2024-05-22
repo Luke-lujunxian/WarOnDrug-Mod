@@ -1,0 +1,187 @@
+<Defs>
+    <FactionDef Name="PirateBandBase" ParentName="FactionBase">
+        <defName>RIM_DEA</defName>
+        <label>RDEA</label>
+        <description>An organization that fights against drug trafficking.</description>
+        <pawnSingular>RDEA agent</pawnSingular>
+        <pawnsPlural>RDEA agents</pawnsPlural>
+        <listOrderPriority>10</listOrderPriority>
+        <settlementGenerationWeight>1</settlementGenerationWeight>
+        <requiredCountAtGameStart>1</requiredCountAtGameStart>
+        <canSiege>true</canSiege>
+        <canStageAttacks>true</canStageAttacks>
+        <leaderTitle>Chief Agent</leaderTitle>
+        <factionNameMaker>NamerFactionOutlander</factionNameMaker>
+        <settlementNameMaker>NamerSettlementOutlander</settlementNameMaker>
+        <hidden>true</hidden>
+        <factionIconPath>Pill</factionIconPath>
+        <colorSpectrum>
+            <li>(0.78, 0, 0.27)</li>
+            <li>(1, 0.74, 0.83)</li>
+        </colorSpectrum>
+        <permanentEnemy>false</permanentEnemy>
+        <techLevel>Spacer</techLevel>
+        <allowedCultures>
+            <li>Rustican</li>
+        </allowedCultures>
+        <requiredMemes>
+            <li MayRequire="Ludeon.RimWorld.Ideology">Supremacist</li>
+        </requiredMemes>
+        <!-- <allowedMemes>
+            <li MayRequire="Ludeon.RimWorld.Ideology">PainIsVirtue</li>
+            <li MayRequire="Ludeon.RimWorld.Ideology">FleshPurity</li>
+        </allowedMemes> -->
+        <disallowedMemes>
+            <li MayRequire="Ludeon.RimWorld.Ideology">Structure_Animist</li>
+            <li MayRequire="Ludeon.RimWorld.Ideology">Nudism</li>
+            <li MayRequire="Ludeon.RimWorld.Ideology">Blindsight</li>
+        </disallowedMemes>
+        <xenotypeSet>
+            <xenotypeChances>
+                <Dirtmole MayRequire="Ludeon.RimWorld.Biotech">0.1</Dirtmole>
+                <Hussar MayRequire="Ludeon.RimWorld.Biotech">0.05</Hussar>
+                <Waster MayRequire="Ludeon.RimWorld.Biotech">0.025</Waster>
+                <Pigskin MayRequire="Ludeon.RimWorld.Biotech">0.025</Pigskin>
+                <Neanderthal MayRequire="Ludeon.RimWorld.Biotech">0.025</Neanderthal>
+                <Impid MayRequire="Ludeon.RimWorld.Biotech">0.025</Impid>
+                <Genie MayRequire="Ludeon.RimWorld.Biotech">0.025</Genie>
+                <Yttakin MayRequire="Ludeon.RimWorld.Biotech">0.025</Yttakin>
+            </xenotypeChances>
+        </xenotypeSet>
+        <apparelStuffFilter>
+            <thingDefs>
+              <li>Synthread</li>
+              <li>Hyperweave</li>
+              <li>Plasteel</li>
+            </thingDefs>
+        </apparelStuffFilter>
+        <backstoryFilters>
+            <li>
+                <categories>
+                  <li>Outlander</li>
+                </categories>
+                <commonality>0.95</commonality>
+              </li>
+              <li>
+                <categories>
+                  <li>Offworld</li>
+                </categories>
+                <commonality>0.05</commonality>
+              </li>
+        </backstoryFilters>
+        <allowedArrivalTemperatureRange>-40~45</allowedArrivalTemperatureRange>
+        <raidLootMaker>OutlanderRaidLootMaker</raidLootMaker>
+        <maxPawnCostPerTotalPointsCurve>
+            <points>
+                <li>(0,35)</li>
+                <li>(70, 100)</li>
+                <li>(700, 150)</li>
+                <li>(1300, 250)</li>
+                <li>(100000, 15000)</li>
+            </points>
+        </maxPawnCostPerTotalPointsCurve>
+        <pawnGroupMakers>
+            <li>
+                <!-- Normal fights, ranged with melee mix-ins -->
+                <kindDef>Combat</kindDef>
+                <commonality>100</commonality>
+                <options>
+                  <Thrasher>3</Thrasher>
+                  <Scavenger>10</Scavenger>
+                  <Pirate>10</Pirate>
+                  <Grenadier_EMP>0.25</Grenadier_EMP>
+                  <Grenadier_Smoke>0.25</Grenadier_Smoke>
+                  <Grenadier_Destructive>2</Grenadier_Destructive>
+                  <Mercenary_Gunner>15</Mercenary_Gunner>
+                  <Mercenary_Heavy>10</Mercenary_Heavy>
+                  <Mercenary_Slasher>3</Mercenary_Slasher>
+                  <Mercenary_Sniper>7</Mercenary_Sniper>
+                  <Mercenary_Elite>10</Mercenary_Elite>
+                  <PirateBoss>5</PirateBoss>
+                </options>
+              </li>
+              <li>
+                <!-- Normal fights, melee-only -->
+                <kindDef>Combat</kindDef>
+                <commonality>30</commonality>
+                <disallowedStrategies>
+                  <li>Siege</li>
+                </disallowedStrategies>
+                <options>
+                  <Thrasher>10</Thrasher>
+                  <Mercenary_Slasher>10</Mercenary_Slasher>
+                  <PirateBoss>5</PirateBoss>
+                </options>
+              </li>
+              <li>
+                <!-- Normal fights, ranged only -->
+                <kindDef>Combat</kindDef>
+                <commonality>20</commonality>
+                <options>
+                  <Scavenger>10</Scavenger>
+                  <Pirate>10</Pirate>
+                  <Grenadier_EMP>0.25</Grenadier_EMP>
+                  <Grenadier_Smoke>0.25</Grenadier_Smoke>
+                  <Grenadier_Destructive>2</Grenadier_Destructive>
+                  <Mercenary_Gunner>10</Mercenary_Gunner>
+                  <Mercenary_Heavy>6</Mercenary_Heavy>
+                  <Mercenary_Sniper>7</Mercenary_Sniper>
+                  <Mercenary_Elite>10</Mercenary_Elite>
+                  <PirateBoss>5</PirateBoss>
+                </options>
+              </li>
+              <li>
+                <!-- Normal fights, explosives with ranged mix-ins -->
+                <kindDef>Combat</kindDef>
+                <commonality>15</commonality>
+                <disallowedStrategies>
+                  <li>Siege</li>
+                </disallowedStrategies>
+                <options>
+                  <Grenadier_EMP>0.5</Grenadier_EMP>
+                  <Grenadier_Smoke>0.5</Grenadier_Smoke>
+                  <Grenadier_Destructive>10</Grenadier_Destructive>
+                  <Mercenary_Gunner>1</Mercenary_Gunner>
+                  <Mercenary_Heavy>10</Mercenary_Heavy>
+                  <Mercenary_Elite>1</Mercenary_Elite>
+                  <PirateBoss>1</PirateBoss>
+                </options>
+              </li>
+              <li>
+                <!-- Normal fights, snipers only -->
+                <kindDef>Combat</kindDef>
+                <commonality>10</commonality>
+                <options>
+                  <Mercenary_Sniper>10</Mercenary_Sniper>
+                </options>
+              </li>
+              <li>
+                <!-- Normal fights, drifters only (very rare) -->
+                <kindDef>Combat</kindDef>
+                <commonality>2.5</commonality>
+                <maxTotalPoints>1000</maxTotalPoints>
+                <options>
+                  <Drifter>10</Drifter>
+                </options>
+              </li>
+              <li>
+                <!-- Base defense, mainly ranged with melee mix-ins -->
+                <kindDef>Settlement</kindDef>
+                <options>
+                  <Thrasher>3</Thrasher>
+                  <Pirate>10</Pirate>
+                  <Grenadier_Destructive>2</Grenadier_Destructive>
+                  <Mercenary_Slasher>3</Mercenary_Slasher>
+                  <Mercenary_Sniper>10</Mercenary_Sniper>
+                  <Mercenary_Gunner>10</Mercenary_Gunner>
+                  <Mercenary_Elite>10</Mercenary_Elite>
+                  <PirateBoss>10</PirateBoss>
+                </options>
+              </li>
+
+        </pawnGroupMakers>
+        <settlementTexturePath>World/WorldObjects/DefaultSettlement</settlementTexturePath>
+        <maxConfigurableAtWorldCreation>9999</maxConfigurableAtWorldCreation>
+        <configurationListOrderPriority>60</configurationListOrderPriority>
+    </FactionDef>
+</Defs>

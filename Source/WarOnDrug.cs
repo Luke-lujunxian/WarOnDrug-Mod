@@ -41,7 +41,7 @@ namespace WarOnDrug
                     }
                 }))();
             }
-            catch (TypeLoadException ex) { Log.Message("[WOD] Error when patching VanillaTradingExpanded "); }
+            catch (TypeLoadException ex) { Log.Error("[WOD] Error when patching VanillaTradingExpanded "); }
 
 /*            if (Harmony.HasAnyPatches("OskarPotocki.VanillaTradingExpanded"))
             {
@@ -91,18 +91,3 @@ namespace WarOnDrug
 
 }
 
-/*
- * TODOs:
- * 
- * [x]Drug Sell tracking
- * [x]Special buyer to scale with sell
- * [x]VTE patch
- * []Drug effect on raiders
- * Raid from hidden dealer faction
- * Raid from hidden anti-drug faction
- * Supply mission and call trigger
- * Assassination mission
- * storage raid mission
- * Give addition on contect: drug horror
- * 
- */

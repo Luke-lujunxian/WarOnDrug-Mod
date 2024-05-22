@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <SitePartDef ParentName="WorkSiteBase">
+        <defName>WorkSite_DrugHouse</defName>
+        <label>drug work site</label>
+        <workerClass>WarOnDrug.SitePartWorker_WorkSite_Drug</workerClass>
+        <expandingIconTexture>World/WorldObjects/Expanding/Sites/LoggingWorkSite</expandingIconTexture>
+        <selectionWeight>1</selectionWeight>
+        <lootTable>
+            <li>
+              <thing>Yayo</thing>
+              <weight>1</weight>
+            </li>
+            <li>
+              <thing>Flake</thing>
+              <weight>1.25</weight>
+            </li>
+            <li>
+              <thing>SmokeleafJoint</thing>
+              <weight>0.25</weight>
+            </li>
+            <li>
+              <thing>PsychoidLeaves</thing>
+              <weight>0.5</weight>
+            </li>
+            <li>
+              <thing>SmokeleafLeaves</thing>
+              <weight>0.5</weight>
+            </li>
+            <li>
+              <thing>Neutroamine</thing>
+              <weight>0.5</weight>
+            </li>
+          </lootTable>
+    </SitePartDef>
+
+    <GenStepDef>
+        <defName>WorkSite_DrugHouse_Outpost</defName>
+        <linkWithSite>WorkSite_DrugHouse</linkWithSite>
+        <order>450</order>
+        <genStep Class="GenStep_Outpost">
+          <allowGeneratingThronerooms>false</allowGeneratingThronerooms>
+          <settlementDontGeneratePawns>true</settlementDontGeneratePawns>
+          <allowGeneratingFarms>false</allowGeneratingFarms>
+          <generateLoot>false</generateLoot>
+        </genStep>
+      </GenStepDef>
+    
+      <GenStepDef>
+        <defName>WorkSite_DrugHouse</defName>
+        <linkWithSite>WorkSite_DrugHouse</linkWithSite>
+        <order>455</order>
+        <genStep Class="GenStep_WorkSiteStash">
+          <count>1</count>
+          <nearMapCenter>true</nearMapCenter>
+          <symbolName>WorkSite_mining</symbolName> <!--Use-->
+        </genStep>
+      </GenStepDef>
+    
+      <GenStepDef>
+        <defName>WorkSite_DrugHouse_Pawns</defName>
+        <linkWithSite>WorkSite_DrugHouse</linkWithSite>
+        <order>456</order>
+        <genStep Class="GenStep_WorkSitePawns" />
+      </GenStepDef>
+    
+      <GenStepDef>
+        <defName>WorkSite_DrugHouse_Power</defName>
+        <linkWithSite>WorkSite_DrugHouse</linkWithSite>
+        <order>460</order>
+        <genStep Class="GenStep_Power"/>
+      </GenStepDef>
+    
+      <!-- <RuleDef>
+        <defName>WorkSite_DrugHouse</defName>
+        <symbol>WorkSite_DrugHouse</symbol>
+        <resolvers>
+          <li Class="SymbolResolver_WorkSite_DrugHouse">
+            <minRectSize>(5, 5)</minRectSize>
+          </li>
+        </resolvers>
+      </RuleDef> -->
+
+      <!-- <IncidentDef ParentName="GiveQuestBase">
+        <defName>GiveQuest_DrugSite</defName>
+        <label>drug site</label>
+        <letterLabel>Drug site</letterLabel>
+        <questScriptDef>OpportunitySite_WorkSite</questScriptDef>
+        <pointsScaleable>true</pointsScaleable>
+        <baseChance>0</baseChance> given by a special storyteller comp
+      </IncidentDef> -->
+</Defs>

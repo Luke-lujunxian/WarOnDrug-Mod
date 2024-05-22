@@ -59,7 +59,7 @@ namespace WarOnDrug.HarmonyPatches
                     pawn.health.AddHediff(hediff);
                 }
 
-                if (true)//Addiction
+                if (UnityEngine.Random.value < factionStatus.corruption * 0.5)//Addiction
                 {
                     PawnAddictionHediffsGenerator.GenerateAddictionsAndTolerancesFor(pawn);
 /*                    Log.Message(pawn.needs.AllNeeds.Where(need => need.GetType() == typeof(Need_Chemical)).Count());
@@ -67,17 +67,30 @@ namespace WarOnDrug.HarmonyPatches
                     {
                         Log.Message(need.def.defName);
                     }*/
-                    if (pawn.needs.TryGetNeed<Need_Chemical>() != null)
+                    if (UnityEngine.Random.value >= factionStatus.fulfilmentRate)
                     {
-                        pawn.needs.AllNeeds.Where(need => need.GetType() == typeof(Need_Chemical)).RandomElement().CurLevel = 0.009f;
+                        if (pawn.needs.TryGetNeed<Need_Chemical>() != null)
+                        {
+                            pawn.needs.AllNeeds.Where(need => need.GetType() == typeof(Need_Chemical)).RandomElement().CurLevel = 0.009f;
+                        }
+                        else
+                        {
+#if DEBUG
+                            Log.Message("No need");
+#endif
+                        }
                     }
-                    else
-                    {
-                        Log.Message("No need");
-                    }
-                    
+                }
+
+                if (UnityEngine.Random.value < factionStatus.corruption * 0.01)//Overdoses
+                {
+                    HediffDef od = DefDatabase<HediffDef>.GetNamed("DrugOverdose");
+                    Hediff hediff = HediffMaker.MakeHediff(od, pawn);
+                    hediff.Severity = UnityEngine.Random.Range(0.5f, 0.999f);
+                    pawn.health.AddHediff(hediff);
                 }
             }
+            
         }
 
         private static BodyPartRecord GetRandomPartofDef(Pawn pawn, string defName)

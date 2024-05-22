@@ -2,8 +2,6 @@
 using RimWorld.Planet;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using VanillaTradingExpanded;
 using Verse;
 
 namespace WarOnDrug
@@ -62,7 +60,7 @@ namespace WarOnDrug
                     faction.Value.corruption = Math.Max(-1.0f, Math.Min(1.0f, faction.Value.corruption + newMarket * 0.01f));//Corruption is capped at -1.0f and 1.0f
                     totalMarketSize += faction.Value.marketSize;
                     faction.Value.dailyInflux = 0.0f;
-                    
+
                 }
 
                 if (WarOnDrug.VTE)//Counter the VTE price flucuation and create demand(todo)
@@ -162,7 +160,6 @@ namespace WarOnDrug
         {
             //Do nothing
         }
-
         public void ExposeData()
         {
             Scribe_Values.Look(ref corruption, "corruption", 0.0f);
@@ -171,7 +168,6 @@ namespace WarOnDrug
             Scribe_Values.Look(ref dailyInflux, "dailyInflux", 0.0f);
             Scribe_References.Look(ref faction, "faction", true);
         }
-
 
     }
 

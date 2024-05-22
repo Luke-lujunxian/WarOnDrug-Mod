@@ -9,7 +9,6 @@ namespace WarOnDrug.HarmonyPatches
 
     public static class Postfix_TryExecutePatch
     {
-        //static ThingDef Yayo = DefDatabase<ThingDef>.GetNamed("Yayo");
         [HarmonyPatch(typeof(TradeDeal), nameof(TradeDeal.TryExecute))]
         public static void Postfix(TradeDeal __instance, bool actuallyTraded, Dictionary<ThingDef, int> __state)
         {
@@ -32,8 +31,6 @@ namespace WarOnDrug.HarmonyPatches
 #if DEBUG
                         Log.Message(string.Format("Selling {0}x {1} to {2}}", count, drug.defName));
 #endif
-                        //factionStatus.corruption += 0.001f * count;
-                        //factionStatus.dailyInflux = drugKV.Value * count;
 
                         if (TradeSession.trader.TraderKind == DefDatabase<TraderKindDef>.GetNamed("CaravanArrivalTributeCollector"))//Collector will share influx with others
                         {

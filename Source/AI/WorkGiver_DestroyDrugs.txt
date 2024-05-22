@@ -1,0 +1,63 @@
+﻿using RimWorld;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Verse.AI;
+using Verse;
+
+namespace WarOnDrug
+{
+    internal class WorkGiver_DestroyDrugs : WorkGiver_Scanner
+    {
+        public override PathEndMode PathEndMode => PathEndMode.Touch;
+
+        public override Danger MaxPathDanger(Pawn pawn)
+        {
+            return Danger.Deadly;
+        }
+
+/*        public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn pawn)
+        {
+            foreach (Designation item in pawn.Map.designationManager.designationsByDef[CorpseCleanupDefOf.CorpseCleanup_Destroy])
+            {
+                yield return item.target.Thing;
+            }
+        }
+
+        public override bool ShouldSkip(Pawn pawn, bool forced = false)
+        {
+            if (!pawn.Map.designationManager.AnySpawnedDesignationOfDef(CorpseCleanupDefOf.CorpseCleanup_Destroy))
+            {
+                return false;
+            }
+            return CorpseCleanupModSettings.DestroyRequiresIncendiaryWeapon && !pawn.IsUsingIncendiaryWeapon();
+        }*/
+
+        public override Job JobOnThing(Pawn pawn, Thing thing, bool forced = false)
+        {
+            if (!pawn.CanReserve(thing, 1, -1, null, forced))
+            {
+                return null;
+            }
+            if (thing.IsForbidden(pawn))
+            {
+                return null;
+            }
+            if (thing.IsBurning())
+            {
+                return null;
+            }
+            if (pawn.Map.designationManager.DesignationOn(thing, DesignationDefOf.Strip) != null)
+            {
+                return null;
+            }
+            if (pawn.Map.designationManager.DesignationOn(thing, CorpseCleanupDefOf.CorpseCleanup_Destroy) != null)
+            {
+                return JobMaker.MakeJob(JobDriver_DestroyDrugs, thing);
+            }
+            return null;
+        }
+    }
+}
