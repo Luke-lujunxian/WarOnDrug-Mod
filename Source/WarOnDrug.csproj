@@ -72,6 +72,8 @@
     <Compile Include="IncidentWorker_DEADrugRaid.cs" />
     <Compile Include="MainButton_Toggle.cs" />
     <Compile Include="ModExtension_EffectOnPawn.cs" />
+    <Compile Include="QuestNode_DrugTradeRequest_GetRequestedDrug.cs" />
+    <Compile Include="QuestNode_DrugTradeRequest_RandomOfferDuration.cs" />
     <Compile Include="SitePartWorker_WorkSite_Drug.cs" />
     <Compile Include="WarEffortManager.cs" />
     <Compile Include="WarOnDrug.cs" />

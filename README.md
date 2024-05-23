@@ -24,13 +24,13 @@ There is more than just price flactuation.
 
 [x] Raid from hidden anti-drug faction
 
-Special raid strategy (Dont know how to do it)
+~~Special raid strategy~~ (Dont know how to do it)
 
-Supply mission and call trigger
+[x] Supply mission ~~and call trigger~~
 
-Assassination mission
+~~Assassination mission~~ (AI is too hard to code)
 
-storage raid mission
+[x] storage raid mission
 
 Give addition on contect: drug horror
 
