@@ -12,6 +12,18 @@
     </IncidentDef>
 
     <IncidentDef>
+        <defName>CaravanArrivalDEADrugDestoryer</defName>
+        <label>RDEA contraband collector caravan arrival</label>
+        <targetTags>
+            <li>Map_PlayerHome</li>
+        </targetTags>
+        <workerClass>WarOnDrug.IncidentWorker_CaravanArrivalDrugDestoryer</workerClass>
+        <category>FactionArrival</category>
+        <baseChance>0</baseChance> <!-- given by a special storyteller comp -->
+        <requireColonistsPresent>True</requireColonistsPresent>
+    </IncidentDef>
+
+    <IncidentDef>
         <defName>DEADrugRaid</defName>
         <label>DEA attack team arrival</label>
         <targetTags>

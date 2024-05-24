@@ -13,6 +13,17 @@
                   <li>Map_PlayerHome</li>
                 </allowedTargetTags>
             </li>
+
+            <li Class="StorytellerCompProperties_FactionInteraction">
+              <incident>CaravanArrivalDEADrugDestoryer</incident>
+              <minDaysPassed>30</minDaysPassed>
+              <baseIncidentsPerYear>1</baseIncidentsPerYear>
+              <minSpacingDays>30</minSpacingDays>
+              <minWealth>10000</minWealth>
+              <allowedTargetTags>
+                <li>Map_PlayerHome</li>
+              </allowedTargetTags>
+          </li>
             
             <li Class="StorytellerCompProperties_FactionInteraction">
               <incident>DEADrugRaid</incident>

@@ -16,4 +16,24 @@
       <li Class="StockGenerator_BuyTradeTag"><tag>Drugs</tag></li>
     </stockGenerators>
   </TraderKindDef>
+
+  <TraderKindDef>
+    <defName>WOD_Caravan_DEA_DrugDestoryer</defName>
+    <label>RDEA contraband collector</label>
+    <requestable>False</requestable>
+    <commonality>1</commonality>
+    <!--4 times a year?-->
+    <hideThingsNotWillingToTrade>True</hideThingsNotWillingToTrade>
+    <stockGenerators>
+      <!-- Buying -->
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Silver</thingDef>
+        <countRange>750~1200</countRange>
+      </li>
+      <li Class="WarOnDrug.StockGenerator_BuyTradeTag_Expensive">
+        <price>Expensive</price>
+        <tag>Drugs</tag>
+      </li>
+    </stockGenerators>
+  </TraderKindDef>
 </Defs>

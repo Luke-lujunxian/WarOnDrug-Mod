@@ -69,12 +69,14 @@
     <Compile Include="HarmonyPatches\VTE\Postfix_VTEPatches.cs" />
     <Compile Include="IncidentWorker_CaravanArrivalDrugCollector.cs" />
     <Compile Include="AI\JobDriver_DestroyDrugs.cs" />
+    <Compile Include="IncidentWorker_CaravanArrivalDrugDestoryer.cs" />
     <Compile Include="IncidentWorker_DEADrugRaid.cs" />
     <Compile Include="MainButton_Toggle.cs" />
     <Compile Include="ModExtension_EffectOnPawn.cs" />
     <Compile Include="QuestNode_DrugTradeRequest_GetRequestedDrug.cs" />
     <Compile Include="QuestNode_DrugTradeRequest_RandomOfferDuration.cs" />
     <Compile Include="SitePartWorker_WorkSite_Drug.cs" />
+    <Compile Include="StockGenerator_BuyTradeTag_Expensive.cs" />
     <Compile Include="WarEffortManager.cs" />
     <Compile Include="WarOnDrug.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

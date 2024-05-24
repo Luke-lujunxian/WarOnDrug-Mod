@@ -23,6 +23,8 @@ There is more than just price flactuation.
 ~~Raid from hidden dealer faction~~
 
 [x] Raid from hidden anti-drug faction
+- Add PawnKindDef
+- Add Dispose Mission
 
 ~~Special raid strategy~~ (Dont know how to do it)
 
@@ -33,5 +35,10 @@ There is more than just price flactuation.
 [x] storage raid mission
 
 Give addition on contect: drug horror
+
+Rituals of destorying drugs
+
+Hydraponic drug farm (less to build, no sunlamp required, less efficient, don't die when power off)
+
 
   
