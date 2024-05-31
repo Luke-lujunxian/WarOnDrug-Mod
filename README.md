@@ -23,7 +23,7 @@ There is more than just price flactuation.
 ~~Raid from hidden dealer faction~~
 
 [x] Raid from hidden anti-drug faction
-- Add PawnKindDef
+- [x] Add PawnKindDef
 - Add Dispose Mission
 
 ~~Special raid strategy~~ (Dont know how to do it)

@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <PawnKindDef Name="RDEAgentBase" Abstract="True">
+    <race>Human</race>
+    <defaultFactionType>OutlanderCivil</defaultFactionType>
+    <chemicalAddictionChance>0.01</chemicalAddictionChance>
+    <invNutrition>2.55</invNutrition>
+    <itemQuality>Good</itemQuality>
+    <backstoryCryptosleepCommonality>0.08</backstoryCryptosleepCommonality>
+    <maxGenerationAge>45</maxGenerationAge>
+    <combatEnhancingDrugsChance>0</combatEnhancingDrugsChance>
+    <combatEnhancingDrugsCount>0</combatEnhancingDrugsCount>
+    <biocodeWeaponChance>0.5</biocodeWeaponChance>
+  </PawnKindDef>
+  
+  <PawnKindDef Abstract="True" Name="RDEAGrenadierBase" ParentName="RDEAgentBase">
+    <race>Human</race>
+    <gearHealthRange>1.0~2.3</gearHealthRange>
+    <initialWillRange>1~3</initialWillRange>
+    <apparelTags>
+      <li>IndustrialAdvanced</li>
+      <li>IndustrialMilitaryAdvanced</li>
+      <li>IndustrialMilitaryBasic</li>
+      <li>BeltDefensePop</li>
+    </apparelTags>
+    <apparelMoney>800~1400</apparelMoney>
+    <apparelAllowHeadgearChance>1</apparelAllowHeadgearChance>
+    <weaponMoney>500~500</weaponMoney>
+    <techHediffsChance>0.2</techHediffsChance>
+    <techHediffsMoney>1000~1000</techHediffsMoney>
+    <techHediffsTags>
+      <li>Simple</li>
+      <li>Advanced</li>
+      <li>ImplantEmpireCommon</li>
+    </techHediffsTags>
+    <disallowedTraits>
+      <li>Brawler</li>
+    </disallowedTraits>
+    <inventoryOptions>
+      <skipChance>0.8</skipChance>
+      <subOptionsChooseOne>
+        <li>
+          <thingDef>MedicineIndustrial</thingDef>
+          <countRange>1</countRange>
+        </li>
+      </subOptionsChooseOne>
+    </inventoryOptions>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="RDEAGrenadierBase">
+    <defName>RDEA_Grenadier_Destructive</defName>
+    <label>grenadier</label>
+    <combatPower>70</combatPower>
+    <canBeSapper>true</canBeSapper>
+    <isGoodBreacher>true</isGoodBreacher>
+    <weaponTags>
+      <li>GrenadeDestructive</li>
+    </weaponTags>
+    <initialResistanceRange>10~16</initialResistanceRange>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="RDEAGrenadierBase">
+    <defName>RDEA_Grenadier_EMP</defName>
+    <label>EMP grenadier</label>
+    <combatPower>55</combatPower>
+    <weaponTags>
+      <li>GrenadeEMP</li>
+    </weaponTags>
+    <initialResistanceRange>15~24</initialResistanceRange>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="RDEAGrenadierBase">
+    <defName>RDEA_Grenadier_Smoke</defName>
+    <label>smoke grenadier</label>
+    <combatPower>55</combatPower>
+    <weaponTags>
+      <li>GrenadeSmoke</li>
+    </weaponTags>
+    <weaponMoney>400~400</weaponMoney>
+    <initialResistanceRange>18~28</initialResistanceRange>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="RDEAgentBase" Name="RDEAgentMidTierBase" Abstract="True">
+    <techHediffsChance>0.25</techHediffsChance>
+    <techHediffsMoney>1400~2400</techHediffsMoney>
+    <techHediffsTags>
+      <li>Advanced</li>
+      <li>ImplantEmpireCommon</li>
+    </techHediffsTags>
+    <biocodeWeaponChance>0.5</biocodeWeaponChance>
+    <initialWillRange>2~4</initialWillRange>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="RDEAgentMidTierBase" Name="RDEAGunnerBase" Abstract="True">
+    <label>mercenary gunner</label>
+    <combatPower>85</combatPower>
+    <gearHealthRange>1.0~3.2</gearHealthRange>
+    <apparelTags>
+      <li>IndustrialAdvanced</li>
+      <li>IndustrialMilitaryBasic</li>
+      <li>IndustrialMilitaryAdvanced</li>
+      <li>BeltDefensePop</li>
+    </apparelTags>
+    <apparelMoney>1000~1500</apparelMoney>
+    <apparelAllowHeadgearChance>1</apparelAllowHeadgearChance>
+    <weaponMoney>660~1300</weaponMoney>
+    <weaponTags>
+      <li>Gun</li>
+    </weaponTags>
+    <disallowedTraits>
+      <li>Brawler</li>
+    </disallowedTraits>
+    <combatEnhancingDrugsChance>0.0</combatEnhancingDrugsChance>
+    <combatEnhancingDrugsCount>0</combatEnhancingDrugsCount>
+    <inventoryOptions>
+      <skipChance>0.8</skipChance>
+      <subOptionsChooseOne>
+        <li>
+          <thingDef>MedicineIndustrial</thingDef>
+          <countRange>1</countRange>
+        </li>
+      </subOptionsChooseOne>
+    </inventoryOptions>
+    <skills>
+      <li>
+        <skill>Shooting</skill>
+        <range>6~14</range>
+      </li>
+    </skills>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="RDEAGunnerBase">
+    <defName>RDEA_Gunner_Acidifier</defName>
+    <techHediffsRequired>
+      <li>DeathAcidifier</li>
+    </techHediffsRequired>
+    <initialResistanceRange>10~16</initialResistanceRange>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="RDEAGunnerBase" Name="RDEASniperBase" Abstract="True">
+    <label>mercenary sniper</label>
+    <combatPower>110</combatPower>
+    <gearHealthRange>0.7~3.2</gearHealthRange>
+    <apparelTags>
+      <li>IndustrialAdvanced</li>
+      <li>IndustrialMilitaryBasic</li>
+      <li>IndustrialMilitaryAdvanced</li>
+    </apparelTags>
+    <apparelMoney>2000~3000</apparelMoney>
+    <apparelAllowHeadgearChance>0.85</apparelAllowHeadgearChance>
+    <weaponMoney>1000~1000</weaponMoney>
+    <weaponTags>
+      <li>SniperRifle</li>
+    </weaponTags>
+    <inventoryOptions>
+      <skipChance>0.9</skipChance>
+      <subOptionsChooseOne>
+        <li>
+          <thingDef>MedicineIndustrial</thingDef>
+          <countRange>1</countRange>
+        </li>
+      </subOptionsChooseOne>
+    </inventoryOptions>
+    <skills>
+      <li>
+        <skill>Shooting</skill>
+        <range>10~16</range>
+      </li>
+    </skills>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="RDEASniperBase">
+    <defName>RDEA_Sniper_Acidifier</defName>
+    <techHediffsRequired>
+      <li>DeathAcidifier</li>
+    </techHediffsRequired>
+    <initialResistanceRange>14~23</initialResistanceRange>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="RDEAgentMidTierBase" Name="RDEASlasherBase" Abstract="True">
+    <defName>Mercenary_Slasher</defName>
+    <label>mercenary slasher</label>
+    <combatPower>140</combatPower>
+    <canBeSapper>true</canBeSapper>
+    <gearHealthRange>0.9~3.2</gearHealthRange>
+    <apparelTags>
+      <li>IndustrialAdvanced</li>
+      <li>IndustrialMilitaryBasic</li>
+      <li>IndustrialMilitaryAdvanced</li>
+      <li>BeltDefensePop</li>
+    </apparelTags>
+    <apparelRequired>
+      <li>Apparel_ShieldBelt</li>
+    </apparelRequired>
+    <apparelMoney>600~1600</apparelMoney>
+    <apparelAllowHeadgearChance>1</apparelAllowHeadgearChance>
+    <weaponMoney>400~800</weaponMoney>
+    <weaponTags>
+      <li>MedievalMeleeAdvanced</li>
+    </weaponTags>
+    <inventoryOptions>
+      <skipChance>0.9</skipChance>
+      <subOptionsChooseOne>
+        <li>
+          <thingDef>MedicineIndustrial</thingDef>
+          <countRange>1</countRange>
+        </li>
+      </subOptionsChooseOne>
+    </inventoryOptions>
+    <initialResistanceRange>19~29</initialResistanceRange>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="RDEASlasherBase">
+    <defName>RDEA_Slasher_Acidifier</defName>
+    <techHediffsRequired>
+      <li>DeathAcidifier</li>
+    </techHediffsRequired>
+    <initialResistanceRange>9~15</initialResistanceRange>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="RDEAgentMidTierBase" Name="RDEAgentMercenaryHeavyBase">
+    <defName>RDEA_Heavy</defName>
+    <label>heavy mercenary</label>
+    <labelPlural>heavy mercenaries</labelPlural>
+    <combatPower>140</combatPower>
+    <gearHealthRange>1.1~3.2</gearHealthRange>
+    <apparelTags>
+      <li>IndustrialAdvanced</li>
+      <li>IndustrialMilitaryAdvanced</li>
+      <li>SpacerMilitary</li>
+      <li>BeltDefensePop</li>
+    </apparelTags>
+    <apparelMoney>400~800</apparelMoney>
+    <apparelAllowHeadgearChance>0.9</apparelAllowHeadgearChance>
+    <weaponMoney>1400~1400</weaponMoney>
+    <weaponTags>
+      <li>GunHeavy</li>
+      <li>GunSingleUse</li>
+      <li>Flamethrower</li>
+    </weaponTags>
+    <initialResistanceRange>14~23</initialResistanceRange>
+  </PawnKindDef>
+
+
+  <PawnKindDef Abstract="True" Name="RDEAgentEliteTierBase" ParentName="RDEAgentBase">
+    <combatPower>130</combatPower>
+    <maxGenerationAge>45</maxGenerationAge>
+    <backstoryCryptosleepCommonality>0.25</backstoryCryptosleepCommonality>
+    <gearHealthRange>1~1</gearHealthRange>
+    <apparelTags>
+      <li>IndustrialAdvanced</li>
+      <li>IndustrialMilitaryAdvanced</li>
+      <li>SpacerMilitary</li>
+      <li>BeltDefensePop</li>
+    </apparelTags>
+    <apparelMoney>5000~7000</apparelMoney>
+    <apparelAllowHeadgearChance>1</apparelAllowHeadgearChance>
+    <weaponMoney>500~1400</weaponMoney>
+    <weaponTags>
+      <li>IndustrialGunAdvanced</li>
+    </weaponTags>
+    <disallowedTraits>
+      <li>Brawler</li>
+    </disallowedTraits>
+    <techHediffsMoney>2000~2400</techHediffsMoney>
+    <techHediffsTags>
+      <li>Advanced</li>
+      <li>ImplantEmpireCommon</li>
+    </techHediffsTags>
+    <techHediffsChance>0.35</techHediffsChance>
+    <combatEnhancingDrugsChance>0.80</combatEnhancingDrugsChance>
+    <combatEnhancingDrugsCount>1~2</combatEnhancingDrugsCount>
+    <biocodeWeaponChance>0.3</biocodeWeaponChance>
+    <initialWillRange>3~5</initialWillRange>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="RDEAgentEliteTierBase">
+    <defName>DEAChief</defName>
+    <label>boss</label>
+    <labelPlural>bosses</labelPlural>
+    <factionLeader>true</factionLeader>
+    <canBeSapper>true</canBeSapper>
+    <initialResistanceRange>17~27</initialResistanceRange>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="RDEAgentEliteTierBase" Name="RDEAEliteBase" Abstract="True">
+    <label>elite mercenary</label>
+    <labelPlural>elite mercenaries</labelPlural>
+    <inventoryOptions>
+      <skipChance>0.9</skipChance>
+      <subOptionsChooseOne>
+        <li>
+          <thingDef>MedicineIndustrial</thingDef>
+          <countRange>1</countRange>
+        </li>
+      </subOptionsChooseOne>
+    </inventoryOptions>
+    <skills>
+      <li>
+        <skill>Shooting</skill>
+        <range>10~18</range>
+      </li>
+    </skills>
+  </PawnKindDef>
+  
+  <PawnKindDef ParentName="RDEAEliteBase">
+    <defName>RDEA_Elite_Acidifier</defName>
+    <techHediffsRequired>
+      <li>DeathAcidifier</li>
+    </techHediffsRequired>
+    <initialResistanceRange>12~20</initialResistanceRange>
+  </PawnKindDef>
+
+</Defs>

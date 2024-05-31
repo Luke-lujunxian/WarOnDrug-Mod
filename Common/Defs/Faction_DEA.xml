@@ -98,10 +98,10 @@
             <guards>
               <Villager>3</Villager>
               <Town_Guard>10</Town_Guard>
-              <Grenadier_Destructive>1.5</Grenadier_Destructive>
-              <Mercenary_Slasher>7</Mercenary_Slasher>
-              <Mercenary_Gunner>10</Mercenary_Gunner>
-              <Mercenary_Elite>10</Mercenary_Elite>
+              <RDEA_Grenadier_Destructive>1.5</RDEA_Grenadier_Destructive>
+              <RDEA_Slasher_Acidifier>7</RDEA_Slasher_Acidifier>
+              <RDEA_Gunner_Acidifier>10</RDEA_Gunner_Acidifier>
+              <RDEA_Elite_Acidifier>10</RDEA_Elite_Acidifier>
             </guards>
           </li>
             <li>
@@ -112,15 +112,15 @@
                   <Thrasher>3</Thrasher>
                   <Scavenger>10</Scavenger>
                   <Pirate>10</Pirate>
-                  <Grenadier_EMP>0.25</Grenadier_EMP>
-                  <Grenadier_Smoke>0.25</Grenadier_Smoke>
-                  <Grenadier_Destructive>2</Grenadier_Destructive>
-                  <Mercenary_Gunner>15</Mercenary_Gunner>
-                  <Mercenary_Heavy>10</Mercenary_Heavy>
-                  <Mercenary_Slasher>6</Mercenary_Slasher>
-                  <Mercenary_Sniper>15</Mercenary_Sniper>
-                  <Mercenary_Elite>20</Mercenary_Elite>
-                  <PirateBoss>5</PirateBoss>
+                  <RDEA_Grenadier_EMP>0.25</RDEA_Grenadier_EMP>
+                  <RDEA_Grenadier_Smoke>0.25</RDEA_Grenadier_Smoke>
+                  <RDEA_Grenadier_Destructive>2</RDEA_Grenadier_Destructive>
+                  <RDEA_Gunner_Acidifier>15</RDEA_Gunner_Acidifier>
+                  <RDEA_Heavy>10</RDEA_Heavy>
+                  <RDEA_Slasher_Acidifier>6</RDEA_Slasher_Acidifier>
+                  <RDEA_Sniper_Acidifier>15</RDEA_Sniper_Acidifier>
+                  <RDEA_Elite_Acidifier>20</RDEA_Elite_Acidifier>
+                  <DEAChief>5</DEAChief>
                 </options>
               </li>
               <li>
@@ -131,9 +131,8 @@
                   <li>Siege</li>
                 </disallowedStrategies>
                 <options>
-                  <Thrasher>10</Thrasher>
-                  <Mercenary_Slasher>20</Mercenary_Slasher>
-                  <PirateBoss>15</PirateBoss>
+                  <RDEA_Slasher_Acidifier>20</RDEA_Slasher_Acidifier>
+                  <DEAChief>15</DEAChief>
                 </options>
               </li>
               <li>
@@ -143,14 +142,14 @@
                 <options>
                   <Scavenger>10</Scavenger>
                   <Pirate>10</Pirate>
-                  <Grenadier_EMP>0.25</Grenadier_EMP>
-                  <Grenadier_Smoke>0.25</Grenadier_Smoke>
-                  <Grenadier_Destructive>2</Grenadier_Destructive>
-                  <Mercenary_Gunner>10</Mercenary_Gunner>
-                  <Mercenary_Heavy>12</Mercenary_Heavy>
-                  <Mercenary_Sniper>7</Mercenary_Sniper>
-                  <Mercenary_Elite>20</Mercenary_Elite>
-                  <PirateBoss>10</PirateBoss>
+                  <RDEA_Grenadier_EMP>0.25</RDEA_Grenadier_EMP>
+                  <RDEA_Grenadier_Smoke>0.25</RDEA_Grenadier_Smoke>
+                  <RDEA_Grenadier_Destructive>2</RDEA_Grenadier_Destructive>
+                  <RDEA_Gunner_Acidifier>10</RDEA_Gunner_Acidifier>
+                  <RDEA_Heavy>12</RDEA_Heavy>
+                  <RDEA_Sniper_Acidifier>7</RDEA_Sniper_Acidifier>
+                  <RDEA_Elite_Acidifier>20</RDEA_Elite_Acidifier>
+                  <DEAChief>10</DEAChief>
                 </options>
               </li>
               <li>
@@ -161,13 +160,13 @@
                   <li>Siege</li>
                 </disallowedStrategies>
                 <options>
-                  <Grenadier_EMP>0.5</Grenadier_EMP>
-                  <Grenadier_Smoke>0.5</Grenadier_Smoke>
-                  <Grenadier_Destructive>15</Grenadier_Destructive>
-                  <Mercenary_Gunner>1</Mercenary_Gunner>
-                  <Mercenary_Heavy>15</Mercenary_Heavy>
-                  <Mercenary_Elite>2</Mercenary_Elite>
-                  <PirateBoss>2</PirateBoss>
+                  <RDEA_Grenadier_EMP>0.5</RDEA_Grenadier_EMP>
+                  <RDEA_Grenadier_Smoke>0.5</RDEA_Grenadier_Smoke>
+                  <RDEA_Grenadier_Destructive>15</RDEA_Grenadier_Destructive>
+                  <RDEA_Gunner_Acidifier>1</RDEA_Gunner_Acidifier>
+                  <RDEA_Heavy>15</RDEA_Heavy>
+                  <RDEA_Elite_Acidifier>2</RDEA_Elite_Acidifier>
+                  <DEAChief>2</DEAChief>
                 </options>
               </li>
               <li>
@@ -175,16 +174,7 @@
                 <kindDef>Combat</kindDef>
                 <commonality>10</commonality>
                 <options>
-                  <Mercenary_Sniper>10</Mercenary_Sniper>
-                </options>
-              </li>
-              <li>
-                <!-- Normal fights, drifters only (very rare) -->
-                <kindDef>Combat</kindDef>
-                <commonality>2.5</commonality>
-                <maxTotalPoints>1000</maxTotalPoints>
-                <options>
-                  <Drifter>10</Drifter>
+                  <RDEA_Sniper_Acidifier>10</RDEA_Sniper_Acidifier>
                 </options>
               </li>
               <li>
@@ -193,12 +183,12 @@
                 <options>
                   <Thrasher>3</Thrasher>
                   <Pirate>10</Pirate>
-                  <Grenadier_Destructive>2</Grenadier_Destructive>
-                  <Mercenary_Slasher>3</Mercenary_Slasher>
-                  <Mercenary_Sniper>10</Mercenary_Sniper>
-                  <Mercenary_Gunner>15</Mercenary_Gunner>
-                  <Mercenary_Elite>15</Mercenary_Elite>
-                  <PirateBoss>15</PirateBoss>
+                  <RDEA_Grenadier_Destructive>2</RDEA_Grenadier_Destructive>
+                  <RDEA_Slasher_Acidifier>3</RDEA_Slasher_Acidifier>
+                  <RDEA_Sniper_Acidifier>10</RDEA_Sniper_Acidifier>
+                  <RDEA_Gunner_Acidifier>15</RDEA_Gunner_Acidifier>
+                  <RDEA_Elite_Acidifier>15</RDEA_Elite_Acidifier>
+                  <DEAChief>15</DEAChief>
                 </options>
               </li>
 
