@@ -5,7 +5,7 @@ namespace WarOnDrug
 {
     internal class Window_WarStatus : Window
     {
-        public override Vector2 InitialSize => new Vector2(300, 300);
+        public override Vector2 InitialSize => new Vector2(800, 600);
 
         public Window_WarStatus()
         {
@@ -26,18 +26,26 @@ namespace WarOnDrug
             
             Text.Font = GameFont.Medium;
             Widgets.LabelFit(new Rect(0, 0, inRect.width, 30), "WarOnDrug".Translate());
+            Widgets.LabelFit(new Rect(0, 0, inRect.width, 30), "Status".Translate());
             //Widgets.Label(new Rect(0, 0, inRect.width, 30), "WarOnDrug".Translate());
             Text.Font = GameFont.Small;
 
             var rect = new Rect(0, 30, inRect.width, inRect.height - 30);
+            
             Widgets.DrawMenuSection(rect);
-/*
-            var list = new List<FloatMenuOption>
-            {
-                new FloatMenuOption("WarOnDrug.Cleanup".Translate(), () => Current.Game.GetComponent<GameComponent_Analyzer>().TimeTillCleanup = 0)
-            };*/
 
-            //Find.WindowStack.ImmediateWindow(123456789, rect, WindowLayer.Super, () => Widgets.FloatMenu(rect, list), false, false);
+            string statusText = "";
+            WarEffortManager manager = Find.World.GetComponent<WarEffortManager>();
+            foreach (var faction in manager.ManagedFactions)
+            {
+                statusText += string.Format("{0} has {1} market size and {2} corruption\n", faction.Value.faction.Name, faction.Value.marketSize, faction.Value.corruption);
+            }
+
+
+
+            Widgets.TextArea(rect, statusText, true);
+
+
         }
     }
 }

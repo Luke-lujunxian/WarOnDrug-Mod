@@ -1,6 +1,7 @@
 ﻿using RimWorld;
 using RimWorld.Planet;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Verse;
 
@@ -11,6 +12,7 @@ namespace WarOnDrug
     public class WarEffortManager : WorldComponent
     {
         Dictionary<int, WODFactionStatus> managedFactions;
+        Faction RDEA;
         public float totalMarketSize = 0.0f;
         public WarEffortManager(World world) : base(world)
         {
@@ -19,7 +21,11 @@ namespace WarOnDrug
 
         public void OnFactionCreate(Faction faction)
         {
-            if (faction.temporary || faction.Hidden) { return; }//Do nothing with these two
+            if (faction.def == DefDatabase<FactionDef>.GetNamed("RIM_DEA")) {
+                RDEA = faction;
+                return;
+            }
+            if (faction.temporary || faction.Hidden || faction.IsPlayer) { return; }//Do nothing with these
 
             if (ModsConfig.IdeologyActive)// Check if ideology?
             {
@@ -60,6 +66,13 @@ namespace WarOnDrug
                     faction.Value.corruption = Math.Max(-1.0f, Math.Min(1.0f, faction.Value.corruption + newMarket * 0.01f));//Corruption is capped at -1.0f and 1.0f
                     totalMarketSize += faction.Value.marketSize;
                     faction.Value.dailyInflux = 0.0f;
+                }
+
+                if (totalMarketSize > 500f + 100f)
+                {
+                    RDEA.RelationWith(Faction.OfPlayer).baseGoodwill = -100;
+                    RDEA.RelationWith(Faction.OfPlayer).CheckKindThresholds(RDEA, true, "Recent drug sell", GlobalTargetInfo.Invalid, out bool sentLetter);
+
 
                 }
 
@@ -174,5 +187,28 @@ namespace WarOnDrug
     struct status
     {
 
+    }
+}
+
+public class midSaveChecker: GameComponent
+{
+    public midSaveChecker(Game game)
+    {
+        //Do nothing
+    }
+
+    public override void LoadedGame()
+    {
+        base.LoadedGame();
+        if (WarOnDrug.WarEffortManager.GetWarEffortManager.ManagedFactions.Count == 0)
+        {
+            Log.Warning("[WOD] No faction data, this should not happend. Did you add midsave? Fixing");
+            List<Faction> factions = Find.FactionManager.AllFactionsListForReading;
+            foreach(Faction faction in factions)
+            {
+                WarOnDrug.WarEffortManager.GetWarEffortManager.OnFactionCreate(faction);
+            }
+            Log.Message("Midsave create done");
+        }
     }
 }

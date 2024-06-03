@@ -7,7 +7,7 @@
         <workerClass>WarOnDrug.MainButton_Toggle</workerClass>
         <order>79</order>
             <minimized>True</minimized>
-        <iconPath>Pill</iconPath>
+        <iconPath>TabIcon</iconPath>
         <defaultHotKey></defaultHotKey>
       </MainButtonDef>
 </Defs>

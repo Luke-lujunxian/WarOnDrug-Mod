@@ -26,6 +26,10 @@
     <DefineConstants>DEBUG</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\..\..\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -37,6 +41,14 @@
     <None Include="..\Common\Defs\FactionTab.xml" />
     <None Include="..\Common\Languages\**" />
     <None Include="..\Common\Patches\**" />
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\RimWorldWin64_Data\Managed\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\..\..\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="VanillaTradingExpanded, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\2785616901\1.5\Assemblies\VanillaTradingExpanded.dll</HintPath>
@@ -75,9 +87,6 @@
     <Content Include="VanillaTradingExpanded.dll" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Krafs.Rimworld.Ref">
-      <Version>1.5.4104</Version>
-    </PackageReference>
     <PackageReference Include="Lib.Harmony">
       <Version>2.3.3</Version>
     </PackageReference>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Configuration>
+  <Excluded>
+    <exclude>.git</exclude>
+    <exclude>.vs</exclude>
+    <exclude>Common\Textures\TabIcon.psd</exclude>
+    <exclude>MigrationBackup</exclude>
+    <exclude>packages</exclude>
+    <exclude>Source</exclude>
+    <exclude>WarOnDrug.sln</exclude>
+  </Excluded>
+</Configuration>
