@@ -3,6 +3,9 @@
   <Excluded>
     <exclude>.git</exclude>
     <exclude>.vs</exclude>
+    <exclude>Common\Assemblies\0Harmony.dll</exclude>
+    <exclude>Common\Assemblies\0Harmony.pdb</exclude>
+    <exclude>Common\Assemblies\WarOnDrug.pdb</exclude>
     <exclude>Common\Textures\TabIcon.psd</exclude>
     <exclude>MigrationBackup</exclude>
     <exclude>packages</exclude>

@@ -6,7 +6,7 @@
     <requestable>False</requestable>
     <commonality>4</commonality>
     <!--4 times a year?-->
-    <hideThingsNotWillingToTrade>True</hideThingsNotWillingToTrade>
+    <!-- <hideThingsNotWillingToTrade>True</hideThingsNotWillingToTrade> -->
     <stockGenerators>
       <!-- Buying -->
       <li Class="StockGenerator_SingleDef">
@@ -23,7 +23,7 @@
     <requestable>False</requestable>
     <commonality>1</commonality>
     <!--4 times a year?-->
-    <hideThingsNotWillingToTrade>True</hideThingsNotWillingToTrade>
+    <!-- <hideThingsNotWillingToTrade>True</hideThingsNotWillingToTrade> -->
     <stockGenerators>
       <!-- Buying -->
       <li Class="StockGenerator_SingleDef">

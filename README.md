@@ -40,5 +40,6 @@ Rituals of destorying drugs
 
 Hydraponic drug farm (less to build, no sunlamp required, less efficient, don't die when power off)
 
-
+## Known issues
+- Some trader will show `Exception filling window for RimWorld.Dialog_Trade: System.FormatException: Input string was not in a correct format.` when completing a trade. Can't reproduce consistently.
   

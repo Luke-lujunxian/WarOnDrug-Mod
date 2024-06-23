@@ -25,6 +25,7 @@ namespace WarOnDrug
             Log.Message("------------------------------------------------------");
 #endif
             harmony.PatchAllUncategorized();
+            
 
             try
             {
@@ -34,10 +35,14 @@ namespace WarOnDrug
                     {
                         Log.Message("[WOD] VanillaTradingExpanded detected");
                         VTE = true;
-                        harmony.Patch(AccessTools.Method("VanillaTradingExpanded.Contract:ContractFulfilmentChance"),
+                        var info1 = harmony.Patch(AccessTools.Method("VanillaTradingExpanded.Contract:ContractFulfilmentChance"),
                             postfix: new HarmonyMethod(typeof(Postfix_VTEPatches), nameof(Postfix_VTEPatches.Postfix)));
-                        harmony.Patch(AccessTools.Method("VanillaTradingExpanded.TradingManager:ProcessPlayerTransactions"),
+                        var info2 = harmony.Patch(AccessTools.Method("VanillaTradingExpanded.TradingManager:ProcessPlayerTransactions"),
                             prefix: new HarmonyMethod(typeof(Postfix_RegisterSoldThingPatch), nameof(Postfix_RegisterSoldThingPatch.Prefix)));
+#if DEBUG
+                        Log.Message(info1);
+                        Log.Message(info2);
+#endif
                     }
                 }))();
             }

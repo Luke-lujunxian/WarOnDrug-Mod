@@ -1,6 +1,7 @@
 ﻿using HarmonyLib;
 using RimWorld;
 using System.Collections.Generic;
+using System.Linq;
 using Verse;
 
 namespace WarOnDrug.HarmonyPatches
@@ -13,15 +14,22 @@ namespace WarOnDrug.HarmonyPatches
         public static void Postfix(TradeDeal __instance, bool actuallyTraded, Dictionary<ThingDef, int> __state)
         {
             //Log.Message(Yayo);
+#if DEBUG
             Log.Message("Trying Trade");
+#endif
             if (actuallyTraded)
             {
+#if DEBUG
                 Log.Message("Traded");
+#endif
                 Dictionary<ThingDef, int> transaction = __state;
 
                 foreach (var drugKV in WarOnDrug.DrugList)
                 {
                     var drug = drugKV.Key;
+#if DEBUG
+                    Log.Message($"{drug}");
+#endif
 
                     if (transaction.GetValueSafe(drug) != 0)
                     {
@@ -29,7 +37,7 @@ namespace WarOnDrug.HarmonyPatches
                         Find.World.GetComponent<WarEffortManager>().ManagedFactions.TryGetValue(TradeSession.trader.Faction.loadID, out var factionStatus);
                         if (factionStatus is null) return;//not active faction
 #if DEBUG
-                        Log.Message(string.Format("Selling {0}x {1} to {2}}", count, drug.defName, TradeSession.trader.Faction.Name));
+                        Log.Message(string.Format("Selling {0}x {1} to {2}", count, drug.defName, TradeSession.trader.Faction.Name));
 #endif
 
                         if (TradeSession.trader.TraderKind == DefDatabase<TraderKindDef>.GetNamed("WOD_Caravan_DrugCollector"))//Collector will share influx with others
@@ -48,29 +56,7 @@ namespace WarOnDrug.HarmonyPatches
                         {
                             factionStatus.dailyInflux = drugKV.Value * count;
                         }
-
                     }
-
-                    /*                    if (WarOnDrug.VTE)//Counter the VTE price flucuation and create demand(todo)
-                                        {
-                                            TradingManager VTEmanager = Current.Game.GetComponent<TradingManager>();
-                                            foreach (var item in transaction)
-                                            {
-
-                                                if (!Utils.tradeableItemsToIgnore.Contains(item.Key))
-                                                {
-                                                    if (VTEmanager.thingsAffectedBySoldPurchasedMarketValue.ContainsKey(item.Key))
-                                                    {
-                                                        VTEmanager.thingsAffectedBySoldPurchasedMarketValue[item.Key] -= item.Key.GetStatValueAbstract(StatDefOf.MarketValue) * (float)item.Value;
-                                                    }
-                                                    else
-                                                    {
-                                                        VTEmanager.thingsAffectedBySoldPurchasedMarketValue[item.Key] = (0f - item.Key.GetStatValueAbstract(StatDefOf.MarketValue)) * (float)item.Value;
-                                                    }
-                                                }
-                                            }
-
-                                        }*/
                 }
 
 
@@ -86,8 +72,14 @@ namespace WarOnDrug.HarmonyPatches
                 //Log.Message(tradeable);
                 if (tradeable.ActionToDo == TradeAction.PlayerSells)
                 {
+#if DEBUG
                     Log.Message(tradeable.ThingDef);
-                    __state.Add(tradeable.ThingDef, tradeable.CountToTransferToDestination);
+#endif
+                    if (WarOnDrug.DrugList.Keys.Contains(tradeable.ThingDef))
+                    {
+                        __state.SetOrAdd(tradeable.ThingDef, tradeable.CountToTransferToDestination);
+
+                    }
                 }
             }
         }
