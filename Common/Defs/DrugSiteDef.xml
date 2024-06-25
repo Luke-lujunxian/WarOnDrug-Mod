@@ -3,7 +3,7 @@
     <SitePartDef ParentName="WorkSiteBase">
         <defName>WorkSite_DrugHouse</defName>
         <label>drug work site</label>
-        <workerClass>WarOnDrug.SitePartWorker_WorkSite_Drug</workerClass>
+        <workerClass>WarOnDrug.Quest.SitePartWorker_WorkSite_Drug</workerClass>
         <expandingIconTexture>World/WorldObjects/Expanding/Sites/LoggingWorkSite</expandingIconTexture>
         <selectionWeight>1</selectionWeight>
         <lootTable>

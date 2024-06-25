@@ -4,7 +4,7 @@ using UnityEngine;
 using Verse;
 using Verse.AI;
 
-namespace WarOnDrug
+namespace WarOnDrug.AI
 {
     internal class JobDriver_DestroyDrugs : JobDriver
     {

@@ -2,7 +2,7 @@
 
 using Verse;
 
-namespace WarOnDrug
+namespace WarOnDrug.Incident
 {
     internal class IncidentWorker_DEADrugRaid: IncidentWorker_RaidEnemy
     {
@@ -18,5 +18,12 @@ namespace WarOnDrug
                 return false;
             }
         }
+
+        public override void ResolveRaidStrategy(IncidentParms parms, PawnGroupKindDef groupKind)
+        {
+            base.ResolveRaidStrategy(parms, groupKind);
+
+        }
     }
+
 }

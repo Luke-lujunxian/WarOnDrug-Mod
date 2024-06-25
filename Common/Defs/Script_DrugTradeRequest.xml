@@ -56,12 +56,12 @@
           <inSignal>faction.BecameHostileToPlayer</inSignal>
           <outcome>Fail</outcome>
         </li> -->
-        <li Class="WarOnDrug.QuestNode_DrugTradeRequest_RandomOfferDuration">
+        <li Class="WarOnDrug.Quest.QuestNode_DrugTradeRequest_RandomOfferDuration">
           <settlement>$settlement</settlement>
           <storeAs>timeout</storeAs>
           <storeEstimatedTravelTimeAs>estimatedTravelTime</storeEstimatedTravelTimeAs>
         </li>
-        <li Class="WarOnDrug.QuestNode_DrugTradeRequest_GetRequestedDrug">
+        <li Class="WarOnDrug.Quest.QuestNode_DrugTradeRequest_GetRequestedDrug">
           <storeThingAs>requestedThing</storeThingAs>
           <storeThingCountAs>requestedThingCount</storeThingCountAs>
           <storeMarketValueAs>requestedThingMarketValue</storeMarketValueAs>

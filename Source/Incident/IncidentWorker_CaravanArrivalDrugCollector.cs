@@ -1,7 +1,7 @@
 ﻿using RimWorld;
 using Verse;
 
-namespace WarOnDrug
+namespace WarOnDrug.Incident
 {
     public class IncidentWorker_CaravanArrivalDrugCollector: IncidentWorker_TraderCaravanArrival
     {
@@ -41,7 +41,7 @@ namespace WarOnDrug
                 }
             }*/
 
-            parms.traderKind = DefDatabase<TraderKindDef>.GetNamed("WOD_Caravan_DrugCollector");
+            parms.traderKind = WodDefOf.WOD_Caravan_DrugCollector;
 /*            WarEffortManager manager = WarEffortManager.GetWarEffortManager;
             manager.ManagedFactions.TryGetValue(parms.faction.loadID, out var wODFactionStatus);
             foreach (StockGenerator Stockgen in parms.traderKind.stockGenerators)

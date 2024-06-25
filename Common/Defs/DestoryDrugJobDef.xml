@@ -1,17 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
+
+
     <JobDef>
-        <defName>WOD_DestroyDrugs</defName>
+        <defName>WOD_ConfiscateDrugs</defName>
         <!-- Link to the JobDriver -->
-        <driverClass>WarOnDrug.AI.JobGiver_DestoryDrugs</driverClass>
+        <driverClass>WarOnDrug.AI.JobGiver_ConfiscateDrugs</driverClass>
         <!-- Shown when the pawn is doing the job. TargetA gets translated. See next chapter. -->
-        <reportString>Destorying TargetA.</reportString>
+        <reportString>Confiscating TargetA.</reportString>
         <!-- Whether or not colony animals can interact with the pawn while they are doing this job.
         Defaults to true. -->
         <casualInterruptible>false</casualInterruptible>
         <!-- Whether or not the Job can be "paused" without having to start over again. -->
         <!-- Mostly used for hunting, hauling, refueling.  Defaults to true.-->
         <suspendable>false</suspendable>
-    </JobDef>
+    </JobDef> 
+
+    <DutyDef>
+        <defName>WOD_Confiscate</defName>
+        <thinkNode Class="ThinkNode_Priority">
+          <subNodes>
+            <li Class="JobGiver_AITrashColonyClose" />
+            <li Class="WarOnDrug.AI.JobGiver_AITrashDrugProductionBuilding" />
+            <li Class="WarOnDrug.AI.JobGiver_ConfiscateDrugs" />
+            <li Class="JobGiver_ExitMapBest">
+              <defaultLocomotion>Jog</defaultLocomotion>
+              <jobMaxDuration>200</jobMaxDuration>
+              <forceCanDig>true</forceCanDig>
+            </li>
+          </subNodes>
+        </thinkNode>
+    </DutyDef>
+
+    <RaidStrategyDef ParentName="BreachingBase">
+        <defName>RDEAImmediateAttackBreachingAndConfiscate</defName>
+        <workerClass>WarOnDrug.Raid.RaidStrategyWorker_RDEAImmediateAttackBreachingAndConfiscate</workerClass>
+        <arrivalTextEnemy>They are attacking immediately.\n\nThese raiders intend to breach your walls. They'll determine their own path into your colony and destroy anything in their way.</arrivalTextEnemy>
+    </RaidStrategyDef>
 
 </Defs>

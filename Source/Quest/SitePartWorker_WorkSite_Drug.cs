@@ -3,7 +3,7 @@ using RimWorld.Planet;
 using System.Collections.Generic;
 using Verse;
 
-namespace WarOnDrug
+namespace WarOnDrug.Quest
 {
     public class SitePartWorker_WorkSite_Drug : SitePartWorker_WorkSite
     {

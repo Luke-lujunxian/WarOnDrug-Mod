@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Verse;
 
-namespace WarOnDrug
+namespace WarOnDrug.Incident
 {
     internal class IncidentWorker_CaravanArrivalDrugDestoryer: IncidentWorker_TraderCaravanArrival
     {
@@ -24,7 +24,7 @@ namespace WarOnDrug
                 return false;
             }
 
-            parms.traderKind = DefDatabase<TraderKindDef>.GetNamed("WOD_Caravan_DEA_DrugDestoryer");
+            parms.traderKind = WodDefOf.WOD_Caravan_DEA_DrugDestoryer;
 
 
             return true;

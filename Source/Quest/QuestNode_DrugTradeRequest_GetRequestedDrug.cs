@@ -6,7 +6,7 @@ using System;
 using UnityEngine;
 using Verse;
 
-namespace WarOnDrug
+namespace WarOnDrug.Quest
 {
     public class QuestNode_DrugTradeRequest_GetRequestedDrug : QuestNode_TradeRequest_GetRequestedThing
     {

@@ -46,7 +46,7 @@ namespace WarOnDrug
                     }
                 }))();
             }
-            catch (TypeLoadException ex) { Log.Error("[WOD] Error when patching VanillaTradingExpanded "); }
+            catch (TypeLoadException ex) { Log.Error("[WOD] Error when patching VanillaTradingExpanded" + ex); }
 
 /*            if (Harmony.HasAnyPatches("OskarPotocki.VanillaTradingExpanded"))
             {
@@ -89,6 +89,12 @@ namespace WarOnDrug
             {
                 Log.Message(string.Format("{0} has {1} market size and {2} corruption", faction.Value.faction.Name, faction.Value.marketSize, faction.Value.corruption));
             }
+        }
+
+        [DebugAction("WarOnDrugDebug", "Make RDEA hostile", actionType = DebugActionType.Action, allowedGameStates = AllowedGameStates.Playing)]
+        private static void PissRDEA()
+        {
+            Find.FactionManager.FirstFactionOfDef(WodDefOf.RIM_DEA).SetRelationDirect(Faction.OfPlayer, FactionRelationKind.Hostile);
         }
 
     }

@@ -40,7 +40,7 @@ namespace WarOnDrug.HarmonyPatches
                         Log.Message(string.Format("Selling {0}x {1} to {2}", count, drug.defName, TradeSession.trader.Faction.Name));
 #endif
 
-                        if (TradeSession.trader.TraderKind == DefDatabase<TraderKindDef>.GetNamed("WOD_Caravan_DrugCollector"))//Collector will share influx with others
+                        if (TradeSession.trader.TraderKind == WodDefOf.WOD_Caravan_DrugCollector)//Collector will share influx with others
                         {
                             foreach (var faction in Find.World.GetComponent<WarEffortManager>().ManagedFactions)
                             {
@@ -48,7 +48,7 @@ namespace WarOnDrug.HarmonyPatches
                                 faction.Value.dailyInflux += drugKV.Value * (count/2) / Find.World.GetComponent<WarEffortManager>().ManagedFactions.Count;
                             }
                             factionStatus.dailyInflux = drugKV.Value * (count/2);
-                        }else if (TradeSession.trader.TraderKind == DefDatabase<TraderKindDef>.GetNamed("WOD_Caravan_DEA_DrugDestoryer"))
+                        }else if (TradeSession.trader.TraderKind == WodDefOf.WOD_Caravan_DEA_DrugDestoryer)
                         {
                             //Will not contribute to market size
                         }

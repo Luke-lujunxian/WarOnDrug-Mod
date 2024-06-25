@@ -5,7 +5,7 @@
         <targetTags>
             <li>Map_PlayerHome</li>
         </targetTags>
-        <workerClass>WarOnDrug.IncidentWorker_CaravanArrivalDrugCollector</workerClass>
+        <workerClass>WarOnDrug.Incident.IncidentWorker_CaravanArrivalDrugCollector</workerClass>
         <category>FactionArrival</category>
         <baseChance>0</baseChance> <!-- given by a special storyteller comp -->
         <requireColonistsPresent>True</requireColonistsPresent>
@@ -17,7 +17,7 @@
         <targetTags>
             <li>Map_PlayerHome</li>
         </targetTags>
-        <workerClass>WarOnDrug.IncidentWorker_CaravanArrivalDrugDestoryer</workerClass>
+        <workerClass>WarOnDrug.Incident.IncidentWorker_CaravanArrivalDrugDestoryer</workerClass>
         <category>FactionArrival</category>
         <baseChance>0</baseChance> <!-- given by a special storyteller comp -->
         <requireColonistsPresent>True</requireColonistsPresent>
@@ -29,7 +29,7 @@
         <targetTags>
             <li>Map_PlayerHome</li>
         </targetTags>
-        <workerClass>WarOnDrug.IncidentWorker_DEADrugRaid</workerClass>
+        <workerClass>WarOnDrug.Incident.IncidentWorker_DEADrugRaid</workerClass>
         <category>ThreatBig</category>
         <baseChance>0</baseChance> <!-- given by a special storyteller comp -->
         <requireColonistsPresent>False</requireColonistsPresent>

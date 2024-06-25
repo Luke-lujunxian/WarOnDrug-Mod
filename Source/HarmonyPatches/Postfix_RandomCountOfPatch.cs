@@ -12,7 +12,7 @@ namespace WarOnDrug.HarmonyPatches
         static void Postfix(ref int __result, StockGenerator __instance, ThingDef def)
         {
 
-            if (__instance.trader == DefDatabase<TraderKindDef>.GetNamed("WOD_Caravan_DrugCollector") || __instance.trader == DefDatabase<TraderKindDef>.GetNamed("WOD_Caravan_DEA_DrugDestoryer"))
+            if (__instance.trader == WodDefOf.WOD_Caravan_DrugCollector || __instance.trader == WodDefOf.WOD_Caravan_DEA_DrugDestoryer)
             {
                 if (def == ThingDefOf.Silver)
                 {

@@ -26,7 +26,7 @@ namespace WarOnDrug
             
             Text.Font = GameFont.Medium;
             Widgets.LabelFit(new Rect(0, 0, inRect.width, 30), "WarOnDrug".Translate());
-            Widgets.LabelFit(new Rect(0, 0, inRect.width, 30), "Status".Translate());
+            Widgets.LabelFit(new Rect(0, 30, inRect.width, 30), "Status".Translate());
             //Widgets.Label(new Rect(0, 0, inRect.width, 30), "WarOnDrug".Translate());
             Text.Font = GameFont.Small;
 
