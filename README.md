@@ -26,7 +26,7 @@ There is more than just price flactuation.
 - [x] Add PawnKindDef
 - Add Dispose Mission
 
-~~Special raid strategy~~ (Dont know how to do it)
+[x] Special raid strategy ~~(Dont know how to do it)~~(did it!)
 
 [x] Supply mission ~~and call trigger~~
 
