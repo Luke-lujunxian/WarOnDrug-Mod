@@ -1,5 +1,5 @@
 <Defs>
-    <FactionDef Name="OutlanderFactionBase" ParentName="FactionBase">
+    <FactionDef ParentName="OutlanderFactionBase">
         <defName>RIM_DEA</defName>
         <label>RDEA</label>
         <description>An organization that fights against drug trafficking.</description>
@@ -46,7 +46,6 @@
           <li MayRequire="Ludeon.RimWorld.Ideology">Nudity_Female_Mandatory</li>
           <li MayRequire="Ludeon.RimWorld.Ideology">Nudity_Male_CoveringAnythingButGroinDisapproved</li>
           <li MayRequire="Ludeon.RimWorld.Ideology">Nudity_Female_CoveringAnythingButGroinDisapproved</li>
-          <li MayRequire="Ludeon.RimWorld.Ideology">HighLife</li>
         </disallowedPrecepts>
         <xenotypeSet>
             <xenotypeChances>

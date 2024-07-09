@@ -13,9 +13,6 @@ namespace WarOnDrug.HarmonyPatches.VTE
         public static readonly string WOD_SPECIAL_MARK = "*WOD SUPPLY DEMAND*";
         public static void Postfix(ref float __result, Contract __instance)
         {
-#if DEBUG
-            Log.Message("Prefixing VTE Contract");
-#endif
             if (__instance.Name.Contains(WOD_SPECIAL_MARK))
             {
                 __result = 0;
@@ -29,9 +26,6 @@ namespace WarOnDrug.HarmonyPatches.VTE
 
         public static void Prefix(TradingManager __instance)
         {
-#if DEBUG
-            Log.Message("Prefixing VTE Sold");
-#endif
             WarEffortManager manager = Find.World.GetComponent<WarEffortManager>();
             TradingManager VTEmanager = __instance;
             //The total (1 - value of registered drug)

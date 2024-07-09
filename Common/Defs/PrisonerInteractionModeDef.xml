@@ -1,0 +1,9 @@
+<Defs>
+    <PrisonerInteractionModeDef>
+        <defName>ReleaseAsContact</defName>
+        <label>Release as Contact</label>
+        <description>Release the prisoner back to original faction as a contact.</description>
+        <listOrder>35</listOrder>
+        <isNonExclusiveInteraction>true</isNonExclusiveInteraction>
+    </PrisonerInteractionModeDef>
+</Defs>

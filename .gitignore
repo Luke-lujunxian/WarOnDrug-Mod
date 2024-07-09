@@ -255,3 +255,4 @@ paket-files/
 __pycache__/
 *.pyc
 /MigrationBackup/a48cedf4/WarOnDrug
+/Common/Assemblies/WarOnDrug.dll

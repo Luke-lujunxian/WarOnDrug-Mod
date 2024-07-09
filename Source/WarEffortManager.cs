@@ -96,6 +96,8 @@ namespace WarOnDrug
     {
         public Faction faction;
 
+        public List<Pawn> contacts = new List<Pawn>();
+
         //persentage
         public float corruption = 0.0f;
         //industralized 1
@@ -153,6 +155,7 @@ namespace WarOnDrug
             //Scribe_Values.Look(ref marketDemand, "marketDemand", 0.0f);
             Scribe_Values.Look(ref dailyInflux, "dailyInflux", 0.0f);
             Scribe_References.Look(ref faction, "faction", true);
+            Scribe_Collections.Look(ref contacts, "contacts", LookMode.Reference);
         }
 
     }
