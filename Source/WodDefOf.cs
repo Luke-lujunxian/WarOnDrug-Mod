@@ -5,6 +5,8 @@ using Verse.AI;
 
 namespace WarOnDrug
 {
+#pragma warning disable CS0649
+
     [DefOf]
     internal class WodDefOf
     {
@@ -19,6 +21,9 @@ namespace WarOnDrug
         public static FactionDef RIM_DEA;
 
         public static ThingDef DrugLab;
+
+        public static PrisonerInteractionModeDef ReleaseAsContact;
+
 
 
         static WodDefOf()

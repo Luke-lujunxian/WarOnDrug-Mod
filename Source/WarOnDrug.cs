@@ -3,7 +3,10 @@ using LudeonTK;
 using RimWorld;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Verse;
+using WarOnDrug.HarmonyPatches;
 using WarOnDrug.HarmonyPatches.VTE;
 
 namespace WarOnDrug
@@ -25,7 +28,10 @@ namespace WarOnDrug
             Log.Message("------------------------------------------------------");
 #endif
             harmony.PatchAllUncategorized();
-            
+
+            //Special patch for local method
+            harmony.Patch(typeof(ITab_Pawn_Visitor).GetNestedTypes(AccessTools.all).SelectMany(AccessTools.GetDeclaredMethods).First((MethodInfo m) => m.Name.Contains("DoPrisonerTab") && m.Name.Contains("CanUsePrisonerInteractionMode")), null, new HarmonyMethod(typeof(PrisonerPatches), nameof(PrisonerPatches.CanUsePrisonerInteractionMode_Postfix)));
+
 
             try
             {

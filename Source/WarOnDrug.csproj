@@ -47,6 +47,18 @@
       <HintPath>..\..\..\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>..\..\..\RimWorldWin64_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>..\..\..\RimWorldWin64_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\..\..\RimWorldWin64_Data\Managed\UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="VanillaTradingExpanded, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\2785616901\1.5\Assemblies\VanillaTradingExpanded.dll</HintPath>
@@ -57,7 +69,9 @@
     <Compile Include="AI\JobGiver_AITrashDrugProductionBuilding.cs" />
     <Compile Include="AI\JobGiver_ConfiscateDrugs.cs" />
     <Compile Include="AI\JobGiver_DestoryDrugs.cs" />
+    <Compile Include="ContactInfoComp.cs" />
     <Compile Include="HarmonyPatches\ApplyHarmonyPatches.cs" />
+    <Compile Include="HarmonyPatches\PrisonerPatches.cs" />
     <Compile Include="HarmonyPatches\Postfix_GroupSapwnPatch.cs" />
     <Compile Include="HarmonyPatches\Postfix_RandomCountOfPatch.cs" />
     <Compile Include="HarmonyPatches\Postfix_TryExecutePatch.cs" />
