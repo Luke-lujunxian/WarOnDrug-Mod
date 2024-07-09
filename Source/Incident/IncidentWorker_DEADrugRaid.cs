@@ -1,5 +1,5 @@
 ﻿using RimWorld;
-
+using System.Collections.Generic;
 using Verse;
 
 namespace WarOnDrug.Incident
@@ -23,6 +23,12 @@ namespace WarOnDrug.Incident
         {
             base.ResolveRaidStrategy(parms, groupKind);
 
+            
+            //All center drop?
+            if (!parms.raidStrategy.defName.Contains("Siege") && (parms.raidArrivalMode == PawnsArrivalModeDefOf.EdgeWalkIn))
+            {
+                parms.raidArrivalMode = PawnsArrivalModeDefOf.CenterDrop;
+            }
         }
     }
 

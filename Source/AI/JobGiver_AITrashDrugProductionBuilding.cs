@@ -40,8 +40,18 @@ namespace WarOnDrug.AI
                 Building building = tmpTrashableBuildingCandidates.RandomElement();
                 if (!building.IsBurning())
                 {
+/*                    if (building.InteractionCell.IsValid && pawn.CanReach(building.InteractionCell, PathEndMode.OnCell, Danger.Deadly, mode:TraverseMode.PassDoors))
+                    {
+                        Job job2 = JobMaker.MakeJob(JobDefOf.Goto, building.InteractionCell, 500, checkOverrideOnExpiry: true);
+                        BreachingUtility.FinalizeTrashJob(job2);
+                        job2.canBashDoors = true;
+                        return job2;
+                    }*/
 
-                    Job job = TrashUtility.TrashJob(pawn, building, attackAllInert);
+                    Job job = TrashUtility.TrashJob(pawn, building, true);
+                    job.canBashDoors = true;
+                    job.canUseRangedWeapon = true;
+
                     if (job != null)
                     {
 #if DEBUG

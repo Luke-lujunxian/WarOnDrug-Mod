@@ -152,7 +152,7 @@
                   <Pirate>10</Pirate>
                   <RDEA_Grenadier_EMP>0.25</RDEA_Grenadier_EMP>
                   <RDEA_Grenadier_Smoke>0.25</RDEA_Grenadier_Smoke>
-                  <RDEA_Grenadier_Destructive>2</RDEA_Grenadier_Destructive>
+                  <RDEA_Grenadier_Destructive>4</RDEA_Grenadier_Destructive>
                   <RDEA_Gunner_Acidifier>10</RDEA_Gunner_Acidifier>
                   <RDEA_Heavy>12</RDEA_Heavy>
                   <RDEA_Sniper_Acidifier>7</RDEA_Sniper_Acidifier>

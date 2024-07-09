@@ -4,7 +4,7 @@
   <PawnKindDef Name="RDEAgentBase" Abstract="True">
     <race>Human</race>
     <defaultFactionType>OutlanderCivil</defaultFactionType>
-    <chemicalAddictionChance>0.01</chemicalAddictionChance>
+    <chemicalAddictionChance>0.001</chemicalAddictionChance>
     <invNutrition>2.55</invNutrition>
     <itemQuality>Good</itemQuality>
     <backstoryCryptosleepCommonality>0.08</backstoryCryptosleepCommonality>
@@ -12,6 +12,33 @@
     <combatEnhancingDrugsChance>0</combatEnhancingDrugsChance>
     <combatEnhancingDrugsCount>0</combatEnhancingDrugsCount>
     <biocodeWeaponChance>0.5</biocodeWeaponChance>
+    <techHediffsRequired>
+      <li>DeathAcidifier</li>
+    </techHediffsRequired>
+    <initialWillRange>40~80</initialWillRange>
+    <initialResistanceRange>100~200</initialResistanceRange>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="RDEAgentBase">
+    <defName>RDEA_Breacher</defName>
+    <label>breacher</label>
+    <combatPower>55</combatPower>
+    <itemQuality>Good</itemQuality>
+    <canBeSapper>true</canBeSapper>
+    <isGoodBreacher>true</isGoodBreacher>
+    <gearHealthRange>0.5~1.8</gearHealthRange>
+    <apparelMoney>400~600</apparelMoney>
+    <apparelTags>
+      <li>IndustrialAdvanced</li>
+      <li>IndustrialMilitaryAdvanced</li>
+      <li>IndustrialMilitaryBasic</li>
+      <li>BeltDefensePop</li>
+    </apparelTags>
+    <weaponMoney>250~300</weaponMoney>
+    <weaponTags>
+      <li>NeolithicMeleeDestructive</li>
+    </weaponTags>
+
   </PawnKindDef>
   
   <PawnKindDef Abstract="True" Name="RDEAGrenadierBase" ParentName="RDEAgentBase">
@@ -57,7 +84,6 @@
     <weaponTags>
       <li>GrenadeDestructive</li>
     </weaponTags>
-    <initialResistanceRange>10~16</initialResistanceRange>
   </PawnKindDef>
 
   <PawnKindDef ParentName="RDEAGrenadierBase">
@@ -67,7 +93,6 @@
     <weaponTags>
       <li>GrenadeEMP</li>
     </weaponTags>
-    <initialResistanceRange>15~24</initialResistanceRange>
   </PawnKindDef>
 
   <PawnKindDef ParentName="RDEAGrenadierBase">
@@ -78,7 +103,6 @@
       <li>GrenadeSmoke</li>
     </weaponTags>
     <weaponMoney>400~400</weaponMoney>
-    <initialResistanceRange>18~28</initialResistanceRange>
   </PawnKindDef>
 
   <PawnKindDef ParentName="RDEAgentBase" Name="RDEAgentMidTierBase" Abstract="True">
@@ -88,8 +112,7 @@
       <li>Advanced</li>
       <li>ImplantEmpireCommon</li>
     </techHediffsTags>
-    <biocodeWeaponChance>0.5</biocodeWeaponChance>
-    <initialWillRange>2~4</initialWillRange>
+    <biocodeWeaponChance>0.7</biocodeWeaponChance>
   </PawnKindDef>
 
   <PawnKindDef ParentName="RDEAgentMidTierBase" Name="RDEAGunnerBase" Abstract="True">
@@ -269,10 +292,9 @@
       <li>ImplantEmpireCommon</li>
     </techHediffsTags>
     <techHediffsChance>0.35</techHediffsChance>
-    <combatEnhancingDrugsChance>0.80</combatEnhancingDrugsChance>
+    <combatEnhancingDrugsChance>0.0</combatEnhancingDrugsChance>
     <combatEnhancingDrugsCount>1~2</combatEnhancingDrugsCount>
-    <biocodeWeaponChance>0.3</biocodeWeaponChance>
-    <initialWillRange>3~5</initialWillRange>
+    <biocodeWeaponChance>0.5</biocodeWeaponChance>
   </PawnKindDef>
 
   <PawnKindDef ParentName="RDEAgentEliteTierBase">
@@ -309,7 +331,6 @@
     <techHediffsRequired>
       <li>DeathAcidifier</li>
     </techHediffsRequired>
-    <initialResistanceRange>12~20</initialResistanceRange>
   </PawnKindDef>
 
 </Defs>

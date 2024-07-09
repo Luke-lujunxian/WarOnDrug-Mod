@@ -66,6 +66,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AI\JobGiver_AIBreachingToDrugLab.cs" />
     <Compile Include="AI\JobGiver_AITrashDrugProductionBuilding.cs" />
     <Compile Include="AI\JobGiver_ConfiscateDrugs.cs" />
     <Compile Include="AI\JobGiver_DestoryDrugs.cs" />
