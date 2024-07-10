@@ -85,7 +85,7 @@ namespace WarOnDrug
         public override void FinalizeInit()
         {
             base.FinalizeInit();
-            WarOnDrug.DrugList = WarOnDrug.GenerateDrugList();
+            //WarOnDrug.GenerateDrugList(); 
         }
 
         public static WarEffortManager GetWarEffortManager => Find.World.GetComponent<WarEffortManager>();
@@ -187,4 +187,6 @@ public class midSaveChecker: GameComponent
             Log.Message("Midsave create done");
         }
     }
+
+    
 }

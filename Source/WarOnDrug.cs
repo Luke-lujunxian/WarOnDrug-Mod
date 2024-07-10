@@ -45,36 +45,38 @@ namespace WarOnDrug
                             postfix: new HarmonyMethod(typeof(Postfix_VTEPatches), nameof(Postfix_VTEPatches.Postfix)));
                         var info2 = harmony.Patch(AccessTools.Method("VanillaTradingExpanded.TradingManager:ProcessPlayerTransactions"),
                             prefix: new HarmonyMethod(typeof(Postfix_RegisterSoldThingPatch), nameof(Postfix_RegisterSoldThingPatch.Prefix)));
-#if DEBUG
-                        Log.Message(info1);
-                        Log.Message(info2);
-#endif
                     }
                 }))();
             }
             catch (TypeLoadException ex) { Log.Error("[WOD] Error when patching VanillaTradingExpanded" + ex); }
 
-/*            if (Harmony.HasAnyPatches("OskarPotocki.VanillaTradingExpanded"))
-            {
-                Log.Message("[WOD] VanillaTradingExpanded detected");
-                VTE = true;
-            }
-            else
-            {
-                VTE = false;
-            }*/
+            /*            if (Harmony.HasAnyPatches("OskarPotocki.VanillaTradingExpanded"))
+                        {
+                            Log.Message("[WOD] VanillaTradingExpanded detected");
+                            VTE = true;
+                        }
+                        else
+                        {
+                            VTE = false;
+                        }*/
 
+            LongEventHandler.QueueLongEvent(GenerateDrugList, "loadDrugList", true, null);
             
         }
 
-        
+         
         
 
-        public static Dictionary<ThingDef, float> GenerateDrugList()
+        public static void GenerateDrugList()
         {
-            //Only hard drug metters?
-            Dictionary<ThingDef, float> drugList = new Dictionary<ThingDef, float>
+            if (DrugList != null && DrugList.Count != 0)
             {
+                return;
+            }
+
+            //Only hard drug metters?
+            Dictionary<ThingDef, float> drugList = new Dictionary<ThingDef, float>(10);
+/*            {
                 //The vlaue is one item's contribution to influx, calculated by Duration of high (assuming no tolerance)/24h
                 //1 is the amount for one pawn to consume
                 {DefDatabase<ThingDef>.GetNamed("Yayo"), 0.5f },
@@ -83,8 +85,53 @@ namespace WarOnDrug
                 {DefDatabase<ThingDef>.GetNamed("WakeUp"), 0.5f },
                 {DefDatabase<ThingDef>.GetNamed("SmokeleafJoint"), 0.5f*0.25f },
 
-            };
-            return drugList;
+            };*/
+            foreach (ThingDef item in DefDatabase<ThingDef>.AllDefsListForReading)
+            {
+                if (item.IsWithinCategory(ThingCategoryDefOf.Drugs)  && item.ingestible != null)
+                {
+                    if (item.ingestible.drugCategory == DrugCategory.Hard)
+                    {
+                        bool added = false;
+                        foreach(IngestionOutcomeDoer outcome in item.ingestible.outcomeDoers)
+                        {
+                            if(outcome is IngestionOutcomeDoer_GiveHediff)
+                            {
+                                IngestionOutcomeDoer_GiveHediff hediff = (IngestionOutcomeDoer_GiveHediff)outcome;
+                                if(hediff.hediffDef.hediffClass == typeof(Hediff_High))
+                                {
+                                    float severityPday = hediff.hediffDef.CompProps<HediffCompProperties_SeverityPerDay>().severityPerDay;
+                                    if(severityPday > 0) {
+                                        Log.Warning($"[WOD] Drug type {item}'s Hediff_High outcome {hediff.hediffDef.hediffClass} has positive severityPerDay value {severityPday}\n" +
+                                            $"This is likely to be a mod item with special design, please report this to WOD developer");
+                                    }
+                                    severityPday = Math.Abs(severityPday);
+                                    if (drugList.ContainsKey(item))
+                                    {
+                                        Log.Warning($"Drug type {item} contains more than one Hediff_High outcome.\n " +
+                                            $"This is likely to be a mod item with special design, please report this to WOD developer");
+                                        drugList[item] = Math.Min(drugList[item], hediff.severity / severityPday);
+                                    }
+                                    else
+                                    {
+                                        drugList.Add(item, hediff.severity/ severityPday);
+                                    }
+                                    added = true;
+#if DEBUG
+                                    Log.Message($"Drug type {item} added, value {hediff.severity / severityPday}");
+#endif
+                                }
+                            }
+                        }
+                        if (!added)
+                        {
+                            Log.Warning($"[WOD] Hard drug type {item} dose not give any hediff of type Hediff_High, this may be intented or a oversight of mod author.\n " +
+                                $"It is now ignored by WOD drug market, if you think it should be include, please report this to WOD developer.");
+                        }
+                    }
+                }
+            }
+            DrugList = drugList;
         }
 
         [DebugAction("WarOnDrugDebug", "Print WarEffortManager", actionType = DebugActionType.Action, allowedGameStates = AllowedGameStates.Playing)]
