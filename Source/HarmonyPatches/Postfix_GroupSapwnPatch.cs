@@ -6,10 +6,10 @@ using Verse;
 
 namespace WarOnDrug.HarmonyPatches
 {
-    [HarmonyPatch]
+    //[HarmonyPatch]
     public static class Postfix_GroupSapwnPatch
     {
-        [HarmonyPatch(typeof(IncidentWorker_NeutralGroup), "SpawnPawns",new Type[] {typeof(IncidentParms)})]
+        //[HarmonyPatch(typeof(IncidentWorker_NeutralGroup), "SpawnPawns",new Type[] {typeof(IncidentParms)})]
         public static void Postfix(ref List<Pawn> __result, IncidentParms parms, IncidentWorker_NeutralGroup __instance)
         {
             Random rand = new Random();
