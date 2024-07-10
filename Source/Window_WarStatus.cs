@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Verse;
-using Verse.Noise;
+using Verse.Sound;
 
 namespace WarOnDrug
 {
@@ -37,7 +37,7 @@ namespace WarOnDrug
         {
             //Get window size and resize
             //this.windowRect = new Rect((float)(Screen.width / 2 - 150), (float)(Screen.height / 2 - 150), Screen.width * 0.8f, Screen.height * 0.8f);
-           base.PreOpen();
+            base.PreOpen();
         }
 
         public override void DoWindowContents(Rect inRect)
@@ -126,8 +126,10 @@ namespace WarOnDrug
         }
 
         private static readonly Texture2D SwitchFactionIcon = ContentFinder<Texture2D>.Get("UI/Icons/SwitchFaction");
+        private static readonly Texture2D AddIcon = ContentFinder<Texture2D>.Get("UI/Buttons/Plus");
         public static Faction selectedFaction;
-        
+        public Dictionary<ThingDef, int> tempResources = new Dictionary<ThingDef, int>();
+
 
         private void FillContactsCard(Rect rect)
         {
@@ -156,11 +158,11 @@ namespace WarOnDrug
 
             if (selectedFaction != null)
             {
-                Widgets.DefIcon(new Rect(rect.width / 2 + rect.x,           rect.y, 32f, 32f), selectedFaction.def);
-                Widgets.LabelFit(new Rect(rect.width / 2 + rect.x + 32f,    rect.y, rect.width / 2 - 32f, 32f), selectedFaction.Name);
+                Widgets.DefIcon(new Rect(rect.width / 2 + rect.x, rect.y, 32f, 32f), selectedFaction.def);
+                Widgets.LabelFit(new Rect(rect.width / 2 + rect.x + 32f, rect.y, rect.width / 2 - 32f, 32f), selectedFaction.Name);
             }
 
-            DrawMissionConfig(new Rect(rect.width / 2 + rect.x,             rect.y + 32f, rect.width, rect.height));
+            DrawMissionConfig(new Rect(rect.width / 2 + rect.x, rect.y + 32f, rect.width, rect.height));
         }
 
         public enum contectActions : int
@@ -173,9 +175,12 @@ namespace WarOnDrug
 
         private contectActions ca = 0;
 
+        List<ThingDef> resourcesItems = new List<ThingDef>();
+        List<int> resourcesItemsCount = new List<int>();
         private void DrawMissionConfig(Rect rect)
         {
-            if(Widgets.ButtonText(new Rect(rect.x, rect.y, 64f, 16f), this.ca == 0 ? "Select Action" : this.ca.ToString()))
+            Rect actionBtn = new Rect(rect.x, rect.y, 64f, 32f);
+            if (Widgets.ButtonText(actionBtn, this.ca == 0 ? "Select Action" : this.ca.ToString()))
             {
                 List<FloatMenuOption> list = new List<FloatMenuOption>();
                 foreach (contectActions suit in Enum.GetValues(typeof(contectActions)))
@@ -188,13 +193,94 @@ namespace WarOnDrug
                 }
                 Find.WindowStack.Add(new FloatMenu(list));
             }
-            
+
+            Rect textAreaResources = new Rect(actionBtn.x + actionBtn.width, rect.y, 256f, 32f);
+            Widgets.Label(textAreaResources, "Resources");
+
+
+            Rect resourcesBtn = new Rect(textAreaResources.x + textAreaResources.width, rect.y, 32f, 32f);
+            if (Widgets.ButtonImage(resourcesBtn, AddIcon))
+            {
+                List<FloatMenuOption> list = new List<FloatMenuOption>();
+                foreach (ThingDef good in WarOnDrug.DrugList.Keys)
+                {
+                    Texture2D texture = Widgets.GetIconFor(good);
+                    list.Add(new FloatMenuOption(good.label, delegate
+                    {
+                        resourcesItems.Add(good);
+                        resourcesItemsCount.Add(0);
+                    }, good, texture));
+                }
+                Find.WindowStack.Add(new FloatMenu(list));
+            }
+
+            for (int i = 0; i < resourcesItems.Count; i++)
+            {
+                ThingDef key = resourcesItems[i];
+                Rect resourceItem = new Rect(actionBtn.x , actionBtn.y + actionBtn.height + 32f * i, 32f, 32f);
+                Widgets.DefIcon(new Rect(resourceItem.x, resourceItem.y, 32f, 32f), key);
+                Widgets.LabelFit(new Rect(resourceItem.x + 32f, resourceItem.y, 128f, 32f), key.label);
+                int count = resourcesItemsCount[i];
+                string buffer = null;
+                Widgets.TextFieldNumeric<int>(new Rect(resourceItem.x + 32f + 128f, resourceItem.y, 64f, 32f), ref count, ref buffer);
+                resourcesItemsCount[i] = count;
+                if (Widgets.ButtonText(new Rect(resourceItem.x + 32f + 128f + 64f, resourceItem.y , 64f, 32f), "CancelButton".Translate()))
+                {
+                    resourcesItems.RemoveAt(i);
+                    resourcesItemsCount.RemoveAt(i); 
+                    i--;
+                }
+            }
         }
+
 
 
         public void SetTab(WodWinTab infoCardTab)
         {
             tab = infoCardTab;
         }
+    }
+
+    internal class Window_setResources : Window
+    {
+        public TransferableOneWayWidget itemsTransfer;
+        private readonly Vector2 BottomButtonSize = new Vector2(160f, 40f);
+        public bool changed;
+        public TransferableOneWay transferables;
+
+        public Window_setResources()
+        {
+
+        }
+
+        public override void DoWindowContents(Rect inRect)
+        {
+            itemsTransfer.OnGUI(inRect, out changed);
+            DoBottomButtons(inRect);
+        }
+
+        private void DoBottomButtons(Rect rect)
+        {
+            Rect rect2 = new Rect(rect.width / 2f - BottomButtonSize.x / 2f, rect.height - 55f, BottomButtonSize.x, BottomButtonSize.y);
+            if (Widgets.ButtonText(rect2, "AcceptButton".Translate()))
+            {
+                SoundDefOf.Tick_High.PlayOneShotOnCamera();
+                Close(doCloseSound: false);
+            }
+
+            if (Widgets.ButtonText(new Rect(rect2.x - 10f - BottomButtonSize.x, rect2.y, BottomButtonSize.x, BottomButtonSize.y), "ResetButton".Translate()))
+            {
+                SoundDefOf.Tick_Low.PlayOneShotOnCamera();
+                itemsTransfer = new TransferableOneWayWidget(new List<TransferableOneWay>(), null, null, "FormCaravanColonyThingCountTip".Translate(), drawMass: true, IgnorePawnsInventoryMode.IgnoreIfAssignedToUnload, includePawnsMassInMassUsage: false, null, 0f, ignoreSpawnedCorpseGearAndInventoryMass: false, -1, drawMarketValue: true, drawEquippedWeapon: false, drawNutritionEatenPerDay: false, drawMechEnergy: false, drawItemNutrition: true, drawForagedFoodPerDay: false, drawDaysUntilRot: true);
+
+            }
+
+            if (Widgets.ButtonText(new Rect(rect2.xMax + 10f, rect2.y, BottomButtonSize.x, BottomButtonSize.y), "CancelButton".Translate()))
+            {
+                Close();
+            }
+        }
+
+
     }
 }
