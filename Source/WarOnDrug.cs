@@ -59,8 +59,9 @@ namespace WarOnDrug
                         {
                             VTE = false;
                         }*/
-
-            LongEventHandler.QueueLongEvent(GenerateDrugList, "loadDrugList", true, null);
+            Log.Message($"[WOD] DrugList building");
+            LongEventHandler.QueueLongEvent(GenerateDrugList, "loadDrugList", false, null);
+            
             
         }
 
@@ -98,9 +99,17 @@ namespace WarOnDrug
                             if(outcome is IngestionOutcomeDoer_GiveHediff)
                             {
                                 IngestionOutcomeDoer_GiveHediff hediff = (IngestionOutcomeDoer_GiveHediff)outcome;
-                                if(hediff.hediffDef.hediffClass == typeof(Hediff_High))
+                                if(hediff.hediffDef.hediffClass == typeof(Hediff_High) || hediff.hediffDef.defName.Contains("High"))
                                 {
-                                    float severityPday = hediff.hediffDef.CompProps<HediffCompProperties_SeverityPerDay>().severityPerDay;
+                                    HediffCompProperties_SeverityPerDay Comp_SeverityPerDay = hediff.hediffDef.CompProps<HediffCompProperties_SeverityPerDay>();
+                                    if (Comp_SeverityPerDay is null)
+                                    {
+                                        Log.Warning($"[WOD] Drug type {item}'s Hediff_High/likely high outcome {hediff.hediffDef.hediffClass} does not have HediffCompProperties_SeverityPerDay\n" +
+                                                                                       $"This is likely to be a mod item with special design, please report this to WOD developer");
+                                        continue;
+                                    }
+
+                                    float severityPday = Comp_SeverityPerDay.severityPerDay;
                                     if(severityPday > 0) {
                                         Log.Warning($"[WOD] Drug type {item}'s Hediff_High outcome {hediff.hediffDef.hediffClass} has positive severityPerDay value {severityPday}\n" +
                                             $"This is likely to be a mod item with special design, please report this to WOD developer");
@@ -132,6 +141,7 @@ namespace WarOnDrug
                 }
             }
             DrugList = drugList;
+            Log.Message($"DrugList builded with {DrugList.Count} drugs");
         }
 
         [DebugAction("WarOnDrugDebug", "Print WarEffortManager", actionType = DebugActionType.Action, allowedGameStates = AllowedGameStates.Playing)]
