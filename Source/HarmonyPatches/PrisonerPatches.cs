@@ -88,7 +88,7 @@ namespace WarOnDrug.HarmonyPatches
                 return;
             }
 
-            if (pawn.Faction.IsPlayer) // is colony pawn
+            if (pawn.Faction == null || pawn.Faction.IsPlayer) // is colony pawn or null
             {
                 __result = false;
                 return;
