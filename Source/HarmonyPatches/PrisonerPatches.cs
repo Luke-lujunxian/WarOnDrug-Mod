@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using RimWorld;
+using RuntimeAudioClipLoader;
 using System.Collections.Generic;
 using Verse;
 namespace WarOnDrug.HarmonyPatches
@@ -7,6 +8,8 @@ namespace WarOnDrug.HarmonyPatches
     [HarmonyPatch]
     public static class PrisonerPatches
     {
+        public static WarEffortManager manager;
+
         [HarmonyPostfix]
         [HarmonyPatch(typeof(Pawn), nameof(Pawn.ExitMap))]
         public static void ExitMap_Postfix(ref Pawn __instance, bool __state)
@@ -24,8 +27,20 @@ namespace WarOnDrug.HarmonyPatches
                     return;
                 }
 
-                WarEffortManager manager = Find.World.GetComponent<WarEffortManager>();
-                manager.ManagedFactions[__instance.Faction.loadID].contacts.Add(__instance);
+                if(manager is null)
+                {
+                    manager = Find.World.GetComponent<WarEffortManager>();
+                }
+
+                manager.ManagedFactions.TryGetValue(__instance.Faction.loadID, out WODFactionStatus faction);
+
+                if (faction is null)
+                {
+                    return; // not managed faction
+                }
+
+                faction.contacts.Add(__instance);
+                //Patch IsReservedByQuestOrQuestBeingGenerated to avoid being deleted? 
                 try
                 {
                     contactInfoComp.isContact = true;
@@ -53,9 +68,14 @@ namespace WarOnDrug.HarmonyPatches
         [HarmonyPatch(typeof(Pawn), nameof(Pawn.ExitMap))]
         public static void ExitMap_Prefix(ref Pawn __instance, out bool __state)
         {
+            if (__instance.guest is null)
+            {
+                __state = false;
+                return;
+            }
             __state = __instance.guest.Released;
 #if DEBUG
-            Log.Message($"Prisoner {__instance} Released {__state}");
+            Log.Message($"{__instance} is Prisoner Released {__state}");
 #endif
         }
 
