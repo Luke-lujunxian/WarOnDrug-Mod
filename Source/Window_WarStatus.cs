@@ -1,12 +1,20 @@
 ﻿using RimWorld;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using Verse;
 using Verse.Sound;
 
 namespace WarOnDrug
 {
+    public enum contectActions : int
+    {
+        None = 0,
+        Sell,
+        Bribe,
+
+    }
     internal class Window_WarStatus : Window
     {
         public enum WodWinTab : byte
@@ -18,6 +26,7 @@ namespace WarOnDrug
         public override Vector2 InitialSize => new Vector2(950f, 760f);
         protected override float Margin => 0f;
         public static WarEffortManager Manager;
+
 
         public Window_WarStatus()
         {
@@ -114,6 +123,7 @@ namespace WarOnDrug
             Widgets.LabelFit(new Rect(cardRect.x, cardRect.y + 30, cardRect.width, 30), "Status".Translate());
             Text.Font = GameFont.Small;
             var rect = new Rect(cardRect.x, cardRect.y + 60, cardRect.width, cardRect.height - 60);
+
             Widgets.DrawMenuSection(rect);
 
             string statusText = "";
@@ -160,23 +170,25 @@ namespace WarOnDrug
             {
                 Widgets.DefIcon(new Rect(rect.width / 2 + rect.x, rect.y, 32f, 32f), selectedFaction.def);
                 Widgets.LabelFit(new Rect(rect.width / 2 + rect.x + 32f, rect.y, rect.width / 2 - 32f, 32f), selectedFaction.Name);
+                DrawMissionConfig(new Rect(rect.width / 2 + rect.x, rect.y + 32f, rect.width, rect.height));
+
+                
             }
-
-            DrawMissionConfig(new Rect(rect.width / 2 + rect.x, rect.y + 32f, rect.width, rect.height));
-        }
-
-        public enum contectActions : int
-        {
-            None = 0,
-            Sell,
-            Bribe,
+            else
+            {
+                Widgets.LabelFit(new Rect(rect.width / 2 + rect.x, rect.height / 2 + rect.y, 256f, 32f), "SelectFactionToContinue".Translate());
+            }
+            DrawMissionList(new Rect(rect.x, rect.y + 64f, rect.width / 2, rect.height-80f));
 
         }
+
+
 
         private contectActions ca = 0;
 
         List<ThingDef> resourcesItems = new List<ThingDef>();
         List<int> resourcesItemsCount = new List<int>();
+        int mpInput = 0;
         private void DrawMissionConfig(Rect rect)
         {
             Rect actionBtn = new Rect(rect.x, rect.y, 64f, 32f);
@@ -194,8 +206,9 @@ namespace WarOnDrug
                 Find.WindowStack.Add(new FloatMenu(list));
             }
 
-            Rect textAreaResources = new Rect(actionBtn.x + actionBtn.width, rect.y, 256f, 32f);
+            Rect textAreaResources = new Rect(actionBtn.x + actionBtn.width, rect.y, 90f, 32f);
             Widgets.Label(textAreaResources, "Resources");
+            
 
 
             Rect resourcesBtn = new Rect(textAreaResources.x + textAreaResources.width, rect.y, 32f, 32f);
@@ -214,17 +227,52 @@ namespace WarOnDrug
                 Find.WindowStack.Add(new FloatMenu(list));
             }
 
+            //Manpower
+            Rect mpInputLable = new Rect(resourcesBtn.x + resourcesBtn.width, rect.y, 90f, 32f);
+            Widgets.LabelFit(mpInputLable, "manPoawe".Translate());
+            Rect mpInputField = new Rect(mpInputLable.x + mpInputLable.width, rect.y, 64f, 32f);
+            string buffer2 = null;
+            Widgets.TextFieldNumeric<int>(mpInputField, ref mpInput, ref buffer2);
+
+
+            Rect ComfirmBtn = new Rect(mpInputField.x + mpInputField.width, rect.y, 90f, 32f);
+            if(Widgets.ButtonText(ComfirmBtn, "ConfirmButton".Translate()))
+            {
+                if (mpInput < 1)
+                {
+                    Messages.Message("ContactMissionManPowerNotValid".Translate(), MessageTypeDefOf.RejectInput);
+                }
+                else
+                {
+                    var cm = new ContectOperation.ContectMission(resourcesItems, resourcesItemsCount);
+                    cm.mp = mpInput;
+                    cm.action = ca;
+                    mpInput = 0;
+                    Manager.missions.Add(cm);
+                    resourcesItems = new List<ThingDef>();
+                    resourcesItemsCount = new List<int>();
+                }
+
+                
+            }
+
             for (int i = 0; i < resourcesItems.Count; i++)
             {
                 ThingDef key = resourcesItems[i];
+
                 Rect resourceItem = new Rect(actionBtn.x , actionBtn.y + actionBtn.height + 32f * i, 32f, 32f);
+                Rect buttonRect = new Rect(resourceItem.x + 32f + 128f + 64f, resourceItem.y, 64f, 32f);
+                Widgets.DrawBoxSolid(new Rect(resourceItem.x, resourceItem.y, buttonRect.x + buttonRect.width - resourceItem.x + 10f, buttonRect.y + buttonRect.height - resourceItem.y), Widgets.MenuSectionBGFillColor);
+                    
+
                 Widgets.DefIcon(new Rect(resourceItem.x, resourceItem.y, 32f, 32f), key);
                 Widgets.LabelFit(new Rect(resourceItem.x + 32f, resourceItem.y, 128f, 32f), key.label);
                 int count = resourcesItemsCount[i];
                 string buffer = null;
                 Widgets.TextFieldNumeric<int>(new Rect(resourceItem.x + 32f + 128f, resourceItem.y, 64f, 32f), ref count, ref buffer);
                 resourcesItemsCount[i] = count;
-                if (Widgets.ButtonText(new Rect(resourceItem.x + 32f + 128f + 64f, resourceItem.y , 64f, 32f), "CancelButton".Translate()))
+
+                if (Widgets.ButtonText(buttonRect, "CancelButton".Translate()))
                 {
                     resourcesItems.RemoveAt(i);
                     resourcesItemsCount.RemoveAt(i); 
@@ -233,7 +281,68 @@ namespace WarOnDrug
             }
         }
 
+        Vector2 scrollPos = new Vector2();
+        private void DrawMissionList(Rect rect)
+        {
+            Rect viewRect = new Rect(rect);
+            //Widgets.DrawMenuSection(viewRect);
 
+            Widgets.BeginScrollView(rect, ref scrollPos, viewRect);
+#if DEBUG
+            if (Manager.missions.Count == 0)
+            {
+                Manager.missions.Add(new ContectOperation.ContectMission(new List<ThingDef>(), new List<int>()));
+                Manager.missions.Add(new ContectOperation.ContectMission(new List<ThingDef>(), new List<int>()));
+                Manager.missions.Add(new ContectOperation.ContectMission(new List<ThingDef>(), new List<int>()));
+            }
+
+#endif
+            //Header
+            Rect idRectT = new Rect(rect.x, rect.y + 32f, 64f, 32f);
+            Rect actionRectT = new Rect(idRectT.x + idRectT.width, idRectT.y, 64f, 32f);
+            Rect resourcesRectT = new Rect(actionRectT.x + actionRectT.width, idRectT.y, 200f, 32f);
+            Rect mpRectT = new Rect(resourcesRectT.x + resourcesRectT.width, idRectT.y, 32f, 32f);
+            Rect ActionBtnT = new Rect(mpRectT.x + mpRectT.width, idRectT.y, 64f, 32f);
+            Widgets.DrawMenuSection(idRectT);
+            Widgets.DrawMenuSection(actionRectT);
+            Widgets.DrawMenuSection(resourcesRectT);
+            Widgets.DrawMenuSection(mpRectT);
+            Widgets.DrawMenuSection(ActionBtnT);
+            Widgets.LabelFit(idRectT, "contectMissionIDOnioned".Translate());
+            Widgets.LabelFit(actionRectT, "contectMissionAction".Translate());
+            Widgets.LabelFit(resourcesRectT, "contectMissionResources".Translate());
+            Widgets.LabelFit(mpRectT, "contectMissionManPower".Translate());
+            Widgets.LabelFit(ActionBtnT, "Action".Translate());
+
+
+            int lineCount = 1;
+            foreach (ContectOperation.ContectMission mission in Manager.missions)
+            {
+                if (lineCount % 2 == 0)
+                {
+                    Widgets.DrawBoxSolid(new Rect(rect.x, idRectT.y + 32f * lineCount, rect.width, 32f), Widgets.MenuSectionBGFillColor);
+                }
+                Widgets.LabelFit(new Rect(idRectT.x, idRectT.y + 32f * lineCount, idRectT.width, 32f), mission.getDisplayID());
+                Widgets.LabelFit(new Rect(actionRectT.x, actionRectT.y + 32f * lineCount, actionRectT.width, 32f), mission.action.ToString());
+                Widgets.LabelFit(new Rect(resourcesRectT.x, resourcesRectT.y + 32f * lineCount, resourcesRectT.width, 32f), mission.resourcesNeeded.Count.ToString());
+                Widgets.LabelFit(new Rect(mpRectT.x, mpRectT.y + 32f * lineCount, mpRectT.width, 32f), mission.mp.ToString());
+                if (Widgets.ButtonText(new Rect(ActionBtnT.x, ActionBtnT.y+32f*lineCount, ActionBtnT.width,32f), "CancelButton".Translate()))
+                {
+                    Dialog_Confirm dialog_Confirm = new Dialog_Confirm("ConfirmCancelNoRefund".Translate(), "ContactMissionCancel".Translate(), delegate
+                    {
+                        Manager.missions.Remove(mission);
+                    });
+                    Find.WindowStack.Add(dialog_Confirm);
+                    //Manager.missions.Remove(mission);
+                    break;
+                }
+
+
+                lineCount++;
+            }
+
+            Widgets.EndScrollView();
+        }
 
         public void SetTab(WodWinTab infoCardTab)
         {

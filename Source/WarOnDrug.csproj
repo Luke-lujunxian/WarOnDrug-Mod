@@ -71,6 +71,7 @@
     <Compile Include="AI\JobGiver_ConfiscateDrugs.cs" />
     <Compile Include="AI\JobGiver_DestoryDrugs.cs" />
     <Compile Include="ContactInfoComp.cs" />
+    <Compile Include="ContectOperation\ContectMission.cs" />
     <Compile Include="HarmonyPatches\ApplyHarmonyPatches.cs" />
     <Compile Include="HarmonyPatches\PrisonerPatches.cs" />
     <Compile Include="HarmonyPatches\Postfix_GroupSapwnPatch.cs" />

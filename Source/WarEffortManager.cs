@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Verse;
+using WarOnDrug.ContectOperation;
 
 namespace WarOnDrug
 {
@@ -12,6 +13,7 @@ namespace WarOnDrug
     public class WarEffortManager : WorldComponent
     {
         Dictionary<int, WODFactionStatus> managedFactions;
+        public List<ContectMission> missions = new List<ContectMission>(10);
         Faction RDEA;
         public float totalMarketSize = 0.0f;
         public WarEffortManager(World world) : base(world)
@@ -51,6 +53,7 @@ namespace WarOnDrug
         public override void ExposeData()
         {
             Scribe_Collections.Look(ref managedFactions, "WODmanagedFactions", LookMode.Value, LookMode.Deep);
+            Scribe_Collections.Look(ref missions, "WODmissions", LookMode.Deep);
         }
 
         public override void WorldComponentTick()
