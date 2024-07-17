@@ -13,6 +13,12 @@ namespace WarOnDrug.HarmonyPatches
         [HarmonyPatch(typeof(TradeDeal), nameof(TradeDeal.TryExecute))]
         public static void Postfix(TradeDeal __instance, bool actuallyTraded, Dictionary<ThingDef, int> __state)
         {
+            if (TradeSession.trader.TraderKind.orbital)
+            {
+                return; //ignore obital traders
+            }
+            WarEffortManager warEffortManager = Find.World.GetComponent<WarEffortManager>();
+
             //Log.Message(Yayo);
 #if DEBUG
             Log.Message("Trying Trade");
@@ -31,10 +37,11 @@ namespace WarOnDrug.HarmonyPatches
                     Log.Message($"{drug}");
 #endif
 
-                    if (transaction.GetValueSafe(drug) != 0)
+
+                    if (transaction.TryGetValue(drug, -114514) != -114514)
                     {
                         int count = transaction.GetValueSafe(drug);
-                        Find.World.GetComponent<WarEffortManager>().ManagedFactions.TryGetValue(TradeSession.trader.Faction.loadID, out var factionStatus);
+                        warEffortManager.ManagedFactions.TryGetValue(TradeSession.trader.Faction.loadID, out var factionStatus);
                         if (factionStatus is null) return;//not active faction
 #if DEBUG
                         Log.Message(string.Format("Selling {0}x {1} to {2}", count, drug.defName, TradeSession.trader.Faction.Name));

@@ -11,9 +11,10 @@ namespace WarOnDrug.HarmonyPatches.VTE
     public static class Postfix_VTEPatches
     {
         public static readonly string WOD_SPECIAL_MARK = "*WOD SUPPLY DEMAND*";
-        public static void Postfix(ref float __result, Contract __instance)
+        public static void Postfix(ref float __result, Object __instance)
         {
-            if (__instance.Name.Contains(WOD_SPECIAL_MARK))
+            Contract instance = (Contract)__instance;
+            if (instance.Name.Contains(WOD_SPECIAL_MARK))
             {
                 __result = 0;
             }
@@ -24,10 +25,11 @@ namespace WarOnDrug.HarmonyPatches.VTE
     public static class Postfix_RegisterSoldThingPatch
     {
 
-        public static void Prefix(TradingManager __instance)
+        public static void Prefix(Object __instance)
         {
+            TradingManager VTEmanager = (TradingManager)__instance;
             WarEffortManager manager = Find.World.GetComponent<WarEffortManager>();
-            TradingManager VTEmanager = __instance;
+            //TradingManager VTEmanager = __instance;
             //The total (1 - value of registered drug)
             float totalVal = (WarOnDrug.DrugList.Values.Count) - (WarOnDrug.DrugList.Values).Sum();
             foreach (var item in WarOnDrug.DrugList)

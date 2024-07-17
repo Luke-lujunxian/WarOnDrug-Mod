@@ -45,6 +45,10 @@ namespace WarOnDrug
                             postfix: new HarmonyMethod(typeof(Postfix_VTEPatches), nameof(Postfix_VTEPatches.Postfix)));
                         var info2 = harmony.Patch(AccessTools.Method("VanillaTradingExpanded.TradingManager:ProcessPlayerTransactions"),
                             prefix: new HarmonyMethod(typeof(Postfix_RegisterSoldThingPatch), nameof(Postfix_RegisterSoldThingPatch.Prefix)));
+#if DEBUG
+                        Log.Message(info1.ToString());
+                        Log.Message(info2.ToString());
+#endif
                     }
                 }))();
             }
