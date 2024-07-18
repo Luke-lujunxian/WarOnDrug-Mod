@@ -2,39 +2,37 @@
 using RimWorld;
 using System;
 using System.Linq;
-using VanillaTradingExpanded;
+//using VanillaTradingExpanded;
 using Verse;
 
 namespace WarOnDrug.HarmonyPatches.VTE
 {
-    //[HarmonyPatchCategory("VTE")]
-    public static class Postfix_VTEPatches
+    public class Postfix_VTEPatches
     {
         public static readonly string WOD_SPECIAL_MARK = "*WOD SUPPLY DEMAND*";
         public static void Postfix(ref float __result, Object __instance)
         {
-            Contract instance = (Contract)__instance;
+/*            VanillaTradingExpanded.Contract instance = (VanillaTradingExpanded.Contract)__instance;
             if (instance.Name.Contains(WOD_SPECIAL_MARK))
             {
                 __result = 0;
-            }
+            }*/
         }
     }
 
-    //[HarmonyPatchCategory("VTE")]
-    public static class Postfix_RegisterSoldThingPatch
+    public class Postfix_RegisterSoldThingPatch
     {
 
         public static void Prefix(Object __instance)
         {
-            TradingManager VTEmanager = (TradingManager)__instance;
+            VanillaTradingExpanded.TradingManager VTEmanager = (VanillaTradingExpanded.TradingManager)__instance;
             WarEffortManager manager = Find.World.GetComponent<WarEffortManager>();
             //TradingManager VTEmanager = __instance;
             //The total (1 - value of registered drug)
             float totalVal = (WarOnDrug.DrugList.Values.Count) - (WarOnDrug.DrugList.Values).Sum();
             foreach (var item in WarOnDrug.DrugList)
             {
-                if (!Utils.tradeableItemsToIgnore.Contains(item.Key))
+                if (!VanillaTradingExpanded.Utils.tradeableItemsToIgnore.Contains(item.Key))
                 {
                     if (VTEmanager.thingsAffectedBySoldPurchasedMarketValue.ContainsKey(item.Key))
                     {

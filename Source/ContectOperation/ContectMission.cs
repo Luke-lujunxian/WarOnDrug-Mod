@@ -15,7 +15,7 @@ namespace WarOnDrug.ContectOperation
         private int tickLeft;
         public int mp = 0;
         public ContectMissionStatus missionStatus = ContectMissionStatus.Created;
-        public contectActions action = contectActions.None;
+        public ContectMissionTarget missionTarget = ContectMissionTarget.None;
         public Dictionary<ThingDef, int> resourcesNeeded;
         public Dictionary<ThingDef, int> resources;
         public Dictionary<ThingDef, int> reward;
@@ -63,15 +63,19 @@ namespace WarOnDrug.ContectOperation
             return System.BitConverter.ToString(tmpNewHash).Replace("-", "").Substring(0,6);
         }
 
-        void IExposable.ExposeData()
+        public void ExposeData()
         {
             Scribe_Values.Look(ref id, "ID");
             Scribe_Values.Look(ref mp, "mp");
             Scribe_Values.Look(ref missionStatus, "missionStatus");
+            Scribe_Values.Look(ref UniqueID, "UniqueID");
+            Scribe_Values.Look(ref tickLeft, "tickLeft");
+            Scribe_Values.Look(ref missionTarget, "action");
+
             Scribe_Collections.Look(ref resourcesNeeded, "resourcesNeeded", LookMode.Def, LookMode.Value);
             Scribe_Collections.Look(ref resources, "resources", LookMode.Def, LookMode.Value);
             Scribe_Collections.Look(ref reward, "reward", LookMode.Def, LookMode.Value);
-            Scribe_Values.Look(ref UniqueID, "UniqueID");
+
         }
 
         public bool Tick()

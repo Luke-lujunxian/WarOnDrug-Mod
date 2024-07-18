@@ -8,7 +8,7 @@ using Verse.Sound;
 
 namespace WarOnDrug
 {
-    public enum contectActions : int
+    public enum ContectMissionTarget : int
     {
         None = 0,
         Sell,
@@ -184,7 +184,7 @@ namespace WarOnDrug
 
 
 
-        private contectActions ca = 0;
+        private ContectMissionTarget ca = 0;
 
         List<ThingDef> resourcesItems = new List<ThingDef>();
         List<int> resourcesItemsCount = new List<int>();
@@ -195,7 +195,7 @@ namespace WarOnDrug
             if (Widgets.ButtonText(actionBtn, this.ca == 0 ? "Select Action" : this.ca.ToString()))
             {
                 List<FloatMenuOption> list = new List<FloatMenuOption>();
-                foreach (contectActions suit in Enum.GetValues(typeof(contectActions)))
+                foreach (ContectMissionTarget suit in Enum.GetValues(typeof(ContectMissionTarget)))
                 {
                     list.Add(new FloatMenuOption(suit.ToString(), delegate
                     {
@@ -246,7 +246,7 @@ namespace WarOnDrug
                 {
                     var cm = new ContectOperation.ContectMission(resourcesItems, resourcesItemsCount);
                     cm.mp = mpInput;
-                    cm.action = ca;
+                    cm.missionTarget = ca;
                     mpInput = 0;
                     Manager.missions.Add(cm);
                     resourcesItems = new List<ThingDef>();
@@ -323,7 +323,7 @@ namespace WarOnDrug
                     Widgets.DrawBoxSolid(new Rect(rect.x, idRectT.y + 32f * lineCount, rect.width, 32f), Widgets.MenuSectionBGFillColor);
                 }
                 Widgets.LabelFit(new Rect(idRectT.x, idRectT.y + 32f * lineCount, idRectT.width, 32f), mission.getDisplayID());
-                Widgets.LabelFit(new Rect(actionRectT.x, actionRectT.y + 32f * lineCount, actionRectT.width, 32f), mission.action.ToString());
+                Widgets.LabelFit(new Rect(actionRectT.x, actionRectT.y + 32f * lineCount, actionRectT.width, 32f), mission.missionTarget.ToString());
                 Widgets.LabelFit(new Rect(resourcesRectT.x, resourcesRectT.y + 32f * lineCount, resourcesRectT.width, 32f), mission.resourcesNeeded.Count.ToString());
                 Widgets.LabelFit(new Rect(mpRectT.x, mpRectT.y + 32f * lineCount, mpRectT.width, 32f), mission.mp.ToString());
                 if (Widgets.ButtonText(new Rect(ActionBtnT.x, ActionBtnT.y+32f*lineCount, ActionBtnT.width,32f), "CancelButton".Translate()))

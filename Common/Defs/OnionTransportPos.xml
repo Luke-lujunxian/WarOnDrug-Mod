@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <ThingDef ParentName="BuildingBase">
+        <defName>OnionTransportPod</defName>
+        <label>Onion transport pod</label>
+        <description>A transport pod capable of anonymously sending packages. Like the Onion router project in 2k age, this pod will fly to a random hidden node. </description>
+        <graphicData>
+            <texPath>Things/Special/DropPod</texPath>
+            <color>(121, 68, 147)</color>
+            <graphicClass>Graphic_Single</graphicClass>
+            <drawSize>(2,2)</drawSize>
+        </graphicData>
+        <size>(1,1)</size>
+        <rotatable>false</rotatable>
+        <tickerType>Normal</tickerType>
+        <altitudeLayer>BuildingOnTop</altitudeLayer>
+        <passability>PassThroughOnly</passability>
+        <castEdgeShadows>false</castEdgeShadows>
+        <designationHotKey>Misc12</designationHotKey>
+        <fillPercent>0.5</fillPercent>
+        <designationCategory>Misc</designationCategory>
+        <uiOrder>2201</uiOrder>
+        <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+        <statBases>
+            <MaxHitPoints>250</MaxHitPoints>
+            <WorkToBuild>1600</WorkToBuild>
+            <Flammability>0.5</Flammability>
+        </statBases>
+        <costList>
+            <Steel>60</Steel>
+            <ComponentIndustrial>2</ComponentIndustrial>
+            <Plasteel>10</Plasteel>
+        </costList>
+        <comps>
+            <li Class="CompProperties_Transporter">
+                <restEffectiveness>0.8</restEffectiveness>
+                <canChangeAssignedThingsAfterStarting>true</canChangeAssignedThingsAfterStarting>
+            </li>
+            <li Class="WarOnDrug.OnionPod.CompProperties_LaunchableOnion">
+                <skyfallerLeaving>DropPodLeaving</skyfallerLeaving>
+            </li>
+        </comps>
+        <inspectorTabs>
+            <li>ITab_ContentsTransporter</li>
+        </inspectorTabs>
+        <placeWorkers>
+            <li>PlaceWorker_NeedsFuelingPort</li>
+            <li>PlaceWorker_NotUnderRoof</li>
+        </placeWorkers>
+        <researchPrerequisites>
+            <li>TransportPod</li>
+        </researchPrerequisites>
+        <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+        <uiIconScale>0.65</uiIconScale>
+    </ThingDef>
+
+    <ThingDef ParentName="BuildingBase">
+        <defName>OnionPodLauncher</defName>
+        <label>Onion pod launcher</label>
+        <description>A fueling port for launching one Onion transport pod. Pod launchers can launch as a group - but the launchers must be placed adjacent to each other.</description>
+        <thingClass>WarOnDrug.OnionPod.Building_OnionPodLauncher</thingClass>
+        <graphicData>
+            <texPath>Things/Building/Misc/PodLauncher</texPath>
+            <color>(121, 68, 147)</color>
+            <graphicClass>Graphic_Multi</graphicClass>
+            <drawSize>(2,3)</drawSize>
+        </graphicData>
+        <drawerType>MapMeshAndRealTime</drawerType>
+        <size>(1,2)</size>
+        <rotatable>true</rotatable>
+        <altitudeLayer>Building</altitudeLayer>
+        <passability>Impassable</passability>
+        <castEdgeShadows>true</castEdgeShadows>
+        <fillPercent>1.0</fillPercent>
+        <designationCategory>Misc</designationCategory>
+        <uiOrder>2201</uiOrder>
+        <canOverlapZones>false</canOverlapZones>
+        <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+        <building>
+            <hasFuelingPort>true</hasFuelingPort>
+        </building>
+        <statBases>
+            <MaxHitPoints>200</MaxHitPoints>
+            <WorkToBuild>3000</WorkToBuild>
+            <Flammability>0.5</Flammability>
+        </statBases>
+        <costList>
+            <Steel>75</Steel>
+            <ComponentIndustrial>2</ComponentIndustrial>
+            <Plasteel>30</Plasteel>
+        </costList>
+        <comps>
+            <li Class="CompProperties_Refuelable">
+                <fuelCapacity>200.0</fuelCapacity>
+                <targetFuelLevelConfigurable>false</targetFuelLevelConfigurable>
+                <!-- <initialConfigurableTargetFuelLevel>75</initialConfigurableTargetFuelLevel> -->
+                <fuelFilter>
+                    <thingDefs>
+                        <li>Chemfuel</li>
+                    </thingDefs>
+                </fuelFilter>
+                <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+                <autoRefuelPercent>1</autoRefuelPercent>
+                <showFuelGizmo>true</showFuelGizmo>
+                <drawOutOfFuelOverlay>false</drawOutOfFuelOverlay>
+                <drawFuelGaugeInMap>true</drawFuelGaugeInMap>
+                <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+            </li>
+        </comps>
+        <placeWorkers>
+            <li>PlaceWorker_FuelingPort</li>
+            <li>PlaceWorker_NotUnderRoof</li>
+        </placeWorkers>
+        <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+        <researchPrerequisites>
+            <li>TransportPod</li>
+        </researchPrerequisites>
+        <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+        <uiIconScale>0.9</uiIconScale>
+    </ThingDef>
+
+    <ThingDef ParentName="SkyfallerBase">
+        <defName>OnionDropPodLeaving</defName>
+        <label>Onion drop pod (leaving)</label>
+        <thingClass>FlyShipLeaving</thingClass>
+        <graphicData>
+          <texPath>Things/Special/DropPod</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+          <color>(121, 68, 147)</color>
+          <shaderType>CutoutFlying</shaderType>
+          <drawSize>1.9</drawSize>
+        </graphicData>
+        <skyfaller>
+          <movementType>Decelerate</movementType>
+          <reversed>true</reversed>
+          <shadow>Things/Skyfaller/SkyfallerShadowDropPod</shadow>
+          <shadowSize>(2, 2)</shadowSize>
+          <anticipationSound>DropPod_Leaving</anticipationSound>
+          <anticipationSoundTicks>-10</anticipationSoundTicks>
+          <ticksToImpactRange><min>-40</min><max>-15</max></ticksToImpactRange>
+        </skyfaller>
+      </ThingDef>
+</Defs>

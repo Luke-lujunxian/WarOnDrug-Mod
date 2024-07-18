@@ -59,9 +59,8 @@
       <HintPath>..\..\..\RimWorldWin64_Data\Managed\UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="VanillaTradingExpanded, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\2785616901\1.5\Assemblies\VanillaTradingExpanded.dll</HintPath>
+    <Reference Include="VanillaTradingExpanded">
+      <HintPath>..\..\..\..\..\workshop\content\294100\2785616901\1.5\Assemblies\VanillaTradingExpanded.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
@@ -87,6 +86,10 @@
     <Compile Include="Incident\IncidentWorker_CaravanArrivalDrugDestoryer.cs" />
     <Compile Include="Incident\IncidentWorker_DEADrugRaid.cs" />
     <Compile Include="MainButton_Toggle.cs" />
+    <Compile Include="OnionPod\Building_OnionPodLauncher.cs" />
+    <Compile Include="OnionPod\CompLaunchableOnion.cs" />
+    <Compile Include="OnionPod\CompProperties_LaunchableOnion.cs" />
+    <Compile Include="OnionPod\TransportPodsArrivalAction_PopPawnAndLeave.cs" />
     <Compile Include="Quest\QuestNode_DrugTradeRequest_GetRequestedDrug.cs" />
     <Compile Include="Quest\QuestNode_DrugTradeRequest_RandomOfferDuration.cs" />
     <Compile Include="Quest\SitePartWorker_WorkSite_Drug.cs" />
@@ -100,10 +103,7 @@
     <Content Include="AI\WorkGiver_DestroyDrugs.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="VanillaTradingExpanded.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Lib.Harmony">
+    <PackageReference Include="Lib.Harmony" ExcludeAssets="runtime">
       <Version>2.3.3</Version>
     </PackageReference>
   </ItemGroup>

@@ -23,6 +23,8 @@ namespace WarOnDrug
         public static ThingDef DrugLab;
 
         public static PrisonerInteractionModeDef ReleaseAsContact;
+        public static ThingDef OnionTransportPod;
+        public static ThingDef OnionDropPodLeaving;
 
 
 
