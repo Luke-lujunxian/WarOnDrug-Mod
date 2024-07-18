@@ -8,7 +8,7 @@ namespace WarOnDrug.OnionPod
     public class CompLaunchableOnion : CompLaunchable
     {
         private const float FuelPerTile = 3f;
-
+        private ContectOperation.ContectMission TargetMission;
         public CompLaunchableOnion() : base()
         {
 
@@ -44,6 +44,7 @@ namespace WarOnDrug.OnionPod
                             Find.WindowStack.Add(new Dialog_Confirm("ConfirmMissionID".Translate() + " " + mission.getDisplayID(), delegate
                                 {
                                     //Lunch the mission
+                                    TargetMission = mission;
                                     TryLaunch();
                                 }));
                         }));
@@ -96,6 +97,7 @@ namespace WarOnDrug.OnionPod
                 Transporter.TryRemoveLord(map);
                 int groupID = Transporter.groupID;
                 int destinationTile = map.Tile + Random.Range(-10, 10);
+                List<Thing> thingList = new List<Thing>();
                 for (int i = 0; i < transportersInGroup.Count; i++)
                 {
                     CompTransporter compTransporter = transportersInGroup[i];
@@ -104,6 +106,8 @@ namespace WarOnDrug.OnionPod
                     ActiveDropPod activeDropPod = (ActiveDropPod)ThingMaker.MakeThing(ThingDefOf.ActiveDropPod);
                     activeDropPod.Contents = new ActiveDropPodInfo();
                     activeDropPod.Contents.innerContainer.TryAddRangeOrTransfer(directlyHeldThings, canMergeWithExistingStacks: true, destroyLeftover: true);
+                    thingList.AddRange(activeDropPod.Contents.innerContainer);
+
                     FlyShipLeaving obj = (FlyShipLeaving)SkyfallerMaker.MakeSkyfaller(WodDefOf.OnionDropPodLeaving, activeDropPod);
                     obj.groupID = groupID;
                     obj.destinationTile = destinationTile;
@@ -115,7 +119,7 @@ namespace WarOnDrug.OnionPod
                 }
 
                 //Do mission content add
-
+                TargetMission.reveiveResources(thingList);
             }
         }
 

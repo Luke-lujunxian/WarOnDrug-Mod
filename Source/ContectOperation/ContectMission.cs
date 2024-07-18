@@ -1,4 +1,5 @@
 ﻿
+using RimWorld;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
@@ -41,6 +42,18 @@ namespace WarOnDrug.ContectOperation
 
             }
             id = Find.UniqueIDsManager.GetNextQuestID();
+        }
+
+        public void reveiveResources(List<Thing> thing)
+        {
+            //Add some delay?
+            foreach (var item in thing)
+            {
+                if (resources.ContainsKey(item.def))
+                {
+                    resources[item.def] += item.stackCount;
+                }
+            }
         }
 
         public bool isResourcesEnough()

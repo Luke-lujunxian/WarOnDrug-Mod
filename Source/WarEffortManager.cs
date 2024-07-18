@@ -1,7 +1,6 @@
 ﻿using RimWorld;
 using RimWorld.Planet;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Verse;
 using WarOnDrug.ContectOperation;
@@ -12,6 +11,7 @@ namespace WarOnDrug
 
     public class WarEffortManager : WorldComponent
     {
+        private static WarEffortManager warEffortManager;
         Dictionary<int, WODFactionStatus> managedFactions;
         public List<ContectMission> missions = new List<ContectMission>(10);
         Faction RDEA;
@@ -23,7 +23,8 @@ namespace WarOnDrug
 
         public void OnFactionCreate(Faction faction)
         {
-            if (faction.def == DefDatabase<FactionDef>.GetNamed("RIM_DEA")) {
+            if (faction.def == DefDatabase<FactionDef>.GetNamed("RIM_DEA"))
+            {
                 RDEA = faction;
                 return;
             }
@@ -91,7 +92,16 @@ namespace WarOnDrug
             //WarOnDrug.GenerateDrugList(); 
         }
 
-        public static WarEffortManager GetWarEffortManager => Find.World.GetComponent<WarEffortManager>();
+        public static WarEffortManager GetWarEffortManager
+        {
+            get {
+                if (warEffortManager == null)
+                {
+                    warEffortManager = Find.World.GetComponent<WarEffortManager>();
+                }
+                return warEffortManager;
+            }
+        }
 
     }
 
@@ -170,7 +180,7 @@ namespace WarOnDrug
     }
 }
 
-public class midSaveChecker: GameComponent
+public class midSaveChecker : GameComponent
 {
     public midSaveChecker(Game game)
     {
@@ -184,7 +194,7 @@ public class midSaveChecker: GameComponent
         {
             Log.Warning("[WOD] No faction data, this should not happend. Did you add midsave? Fixing");
             List<Faction> factions = Find.FactionManager.AllFactionsListForReading;
-            foreach(Faction faction in factions)
+            foreach (Faction faction in factions)
             {
                 WarOnDrug.WarEffortManager.GetWarEffortManager.OnFactionCreate(faction);
             }
@@ -192,5 +202,5 @@ public class midSaveChecker: GameComponent
         }
     }
 
-    
+
 }
